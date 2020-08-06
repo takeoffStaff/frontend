@@ -3,15 +3,18 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { SignUp, Dashboard, SignIn } from 'pages'
 import { PrivateRoute } from 'components'
 import { AuthLayout } from 'layouts'
+import { useSelector } from 'react-redux'
+import { IStore } from 'types/store'
 
 const Routes: React.FC = () => {
-  const authed = true
+  const { authed } = useSelector((store: IStore) => store.user)
+
   return (
     <Router>
       <Switch>
         {!authed && (
           <AuthLayout>
-            <Route exact path="/register" component={SignUp} />
+            <Route exact path="/registration" component={SignUp} />
             <Route exact path="/login" component={SignIn} />
             <Redirect to="/login" />
           </AuthLayout>

@@ -6,11 +6,15 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { ConfigProvider } from 'antd'
 import ru from 'antd/es/locale/ru_RU'
+import { Provider } from 'react-redux'
+import { store } from 'store/configureStore'
 
 ReactDOM.render(
-  <ConfigProvider locale={ru}>
-    <App />
-  </ConfigProvider>,
+  <Provider store={store}>
+    <ConfigProvider locale={ru}>
+      <App />
+    </ConfigProvider>
+  </Provider>,
   document.getElementById('root')
 )
 serviceWorker.unregister()

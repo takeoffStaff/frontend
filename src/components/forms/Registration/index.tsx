@@ -1,30 +1,14 @@
 import React from 'react'
+import { FormItem } from 'styles/components'
+import { usePresenter } from './usePresenter'
 import { Form, Input, Tooltip, Button } from 'antd'
 import { QuestionCircleOutlined } from '@ant-design/icons'
-import styled from 'styled-components'
-import { Store } from 'antd/lib/form/interface'
-import { useHttp } from 'hooks/http.hook'
-
-interface IFormValues {
-  email: string
-  password: string
-  confirm: string
-  name: string
-  phone?: string
-}
 
 const RegistrationForm = () => {
-  const [form] = Form.useForm()
-
-  const { loading, request, error } = useHttp()
-
-  // Store? WTF?? need to deal with this.
-  const onFinish = (values: Store) => {
-    request('/api/auth/register', 'POST', { ...values })
-  }
+  const { form, onSubmit, loading } = usePresenter()
 
   return (
-    <StyledForm form={form} name="register" onFinish={onFinish} scrollToFirstError>
+    <Form form={form} name="register" onFinish={onSubmit} scrollToFirstError>
       <FormItem
         name="email"
         label="E-mail"
@@ -104,24 +88,11 @@ const RegistrationForm = () => {
 
       <FormItem>
         <Button type="primary" htmlType="submit" loading={loading}>
-          Register
+          Регистрация
         </Button>
       </FormItem>
-    </StyledForm>
+    </Form>
   )
 }
-
-const StyledForm = styled(Form)`
-  width: 100%;
-`
-
-const FormItem = styled(Form.Item)`
-  display: flex;
-  flex-direction: column;
-
-  .ant-form-item-label {
-    text-align: left;
-  }
-`
 
 export default RegistrationForm

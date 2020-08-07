@@ -25,4 +25,9 @@ export const actions = {
     ({
       type: '[USER] DESTROY_USER_DATA',
     } as const),
+
+  checkUserAccessRights: () =>
+    ({
+      type: '[USER] CHECK_USER_ACCESS_RIGHTS',
+    } as const),
 }

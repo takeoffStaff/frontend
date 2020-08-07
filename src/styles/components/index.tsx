@@ -9,3 +9,7 @@ export const FormItem = styled(Form.Item)`
     text-align: left;
   }
 `
+
+export const AuthForm = styled(Form)`
+  width: 500px;
+`

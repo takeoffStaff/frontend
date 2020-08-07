@@ -20,10 +20,13 @@ export const usePresenter = () => {
     [dispatch]
   )
 
-  const goToRegister = (event: SyntheticEvent) => {
-    event.preventDefault()
-    history.push('/registration')
-  }
+  const goToRegistration = useCallback(
+    (event: SyntheticEvent) => {
+      event.preventDefault()
+      history.push('/registration')
+    },
+    [history]
+  )
 
-  return { form, onSubmit, goToRegister, loading }
+  return { form, onSubmit, goToRegistration, loading }
 }

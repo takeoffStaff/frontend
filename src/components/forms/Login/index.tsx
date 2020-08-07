@@ -1,15 +1,15 @@
 import React from 'react'
 import { mixins } from 'styles'
 import styled from 'styled-components'
-import { Form, Input, Button } from 'antd'
-import { FormItem } from 'styles/components'
+import { Input, Button } from 'antd'
+import { FormItem, AuthForm } from 'styles/components'
 import { usePresenter } from './usePresenter'
 
 const LoginForm = () => {
-  const { form, onSubmit, goToRegister, loading } = usePresenter()
+  const { form, onSubmit, goToRegistration, loading } = usePresenter()
 
   return (
-    <Form form={form} name="login" onFinish={onSubmit} scrollToFirstError>
+    <AuthForm form={form} name="login" onFinish={onSubmit} scrollToFirstError>
       <FormItem
         name="email"
         label="E-mail"
@@ -41,11 +41,11 @@ const LoginForm = () => {
         <Button type="primary" htmlType="submit" loading={loading}>
           Войти
         </Button>
-        <a href="/registration" onClick={goToRegister}>
+        <a href="/registration" onClick={goToRegistration}>
           Регистрация
         </a>
       </Div>
-    </Form>
+    </AuthForm>
   )
 }
 

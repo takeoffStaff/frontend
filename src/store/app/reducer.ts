@@ -3,6 +3,7 @@ import { actions } from './actions'
 
 const initialState = {
   loading: false,
+  ready: true,
 }
 
 export const reducer = (state = initialState, action: InferActionsTypes<typeof actions>) => {
@@ -11,6 +12,12 @@ export const reducer = (state = initialState, action: InferActionsTypes<typeof a
       return {
         ...state,
         loading: action.payload.status,
+      }
+    }
+    case '[APP] SET_APP_READY': {
+      return {
+        ...state,
+        ready: action.payload.status,
       }
     }
     default:

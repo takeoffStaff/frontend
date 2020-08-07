@@ -1,14 +1,16 @@
 import React from 'react'
-import { FormItem } from 'styles/components'
+import { mixins } from 'styles'
+import styled from 'styled-components'
 import { usePresenter } from './usePresenter'
-import { Form, Input, Tooltip, Button } from 'antd'
+import { Input, Tooltip, Button } from 'antd'
+import { FormItem, AuthForm } from 'styles/components'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 
 const RegistrationForm = () => {
-  const { form, onSubmit, loading } = usePresenter()
+  const { form, onSubmit, loading, goToLogin } = usePresenter()
 
   return (
-    <Form form={form} name="register" onFinish={onSubmit} scrollToFirstError>
+    <AuthForm form={form} name="register" onFinish={onSubmit} scrollToFirstError>
       <FormItem
         name="email"
         label="E-mail"
@@ -86,13 +88,24 @@ const RegistrationForm = () => {
         <Input />
       </FormItem>
 
-      <FormItem>
+      <Div>
         <Button type="primary" htmlType="submit" loading={loading}>
           Регистрация
         </Button>
-      </FormItem>
-    </Form>
+        <a href="/login" onClick={goToLogin}>
+          На страницу авторизации
+        </a>
+      </Div>
+    </AuthForm>
   )
 }
+
+const Div = styled.div`
+  ${mixins.displayFlex('row', 'flex-start', 'center')}
+
+  > * {
+    ${mixins.inlineSpace('10px')}
+  }
+`
 
 export default RegistrationForm

@@ -4,5 +4,6 @@ export interface IStore {
   user: IUser
   app: {
     loading: boolean
+    ready: boolean
   }
 }

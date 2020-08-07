@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { SignUp, Dashboard, SignIn } from 'pages'
 import { PrivateRoute } from 'components'
-import { CenterLayout } from 'layouts'
+import { CenterLayout, DefaultLayout } from 'layouts'
 import { useSelector } from 'react-redux'
 import { IStore } from 'types/store'
 import { Spin } from 'antd'
@@ -23,8 +23,10 @@ const Routes: React.FC = () => {
             </CenterLayout>
           )}
 
-          <PrivateRoute exact path="/dashboard" component={Dashboard} authed={authed} />
-          <Redirect to="/dashboard" />
+          <DefaultLayout>
+            <PrivateRoute exact path="/dashboard" component={Dashboard} authed={authed} />
+            <Redirect to="/dashboard" />
+          </DefaultLayout>
         </Switch>
       </Router>
     )

@@ -6,7 +6,7 @@ import { FormItem, AuthForm } from 'styles/components'
 import { usePresenter } from './usePresenter'
 
 const LoginForm = () => {
-  const { form, onSubmit, goToRegistration, loading } = usePresenter()
+  const { form, onSubmit, goToRegistration, requestInProgress } = usePresenter()
 
   return (
     <AuthForm form={form} name="login" onFinish={onSubmit} scrollToFirstError>
@@ -38,7 +38,7 @@ const LoginForm = () => {
       </FormItem>
 
       <Div>
-        <Button type="primary" htmlType="submit" loading={loading}>
+        <Button type="primary" htmlType="submit" loading={requestInProgress}>
           Войти
         </Button>
         <a href="/registration" onClick={goToRegistration}>

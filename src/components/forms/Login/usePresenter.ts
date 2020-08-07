@@ -8,7 +8,7 @@ import { IStore } from 'types/store'
 import { Form } from 'antd'
 
 export const usePresenter = () => {
-  const { loading } = useSelector((store: IStore) => store.app)
+  const { requestInProgress } = useSelector((store: IStore) => store.app)
   const [form] = Form.useForm()
   const history = useHistory()
   const dispatch = useDispatch()
@@ -28,5 +28,5 @@ export const usePresenter = () => {
     [history]
   )
 
-  return { form, onSubmit, goToRegistration, loading }
+  return { form, onSubmit, goToRegistration, requestInProgress }
 }

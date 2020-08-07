@@ -8,7 +8,7 @@ import { useCallback } from 'react'
 import { Form } from 'antd'
 
 export const usePresenter = () => {
-  const { loading } = useSelector((store: IStore) => store.app)
+  const { requestInProgress } = useSelector((store: IStore) => store.app)
   const [form] = Form.useForm()
   const dispatch = useDispatch()
   const history = useHistory()
@@ -21,5 +21,5 @@ export const usePresenter = () => {
     history.push('/login')
   }, [history])
 
-  return { form, onSubmit, loading, goToLogin }
+  return { form, onSubmit, requestInProgress, goToLogin }
 }

@@ -2,7 +2,7 @@ import { InferActionsTypes } from 'store/configureStore'
 import { actions } from './actions'
 
 const initialState = {
-  loading: false,
+  requestInProgress: false,
   ready: true,
 }
 
@@ -11,7 +11,7 @@ export const reducer = (state = initialState, action: InferActionsTypes<typeof a
     case '[APP] SET_LOADING': {
       return {
         ...state,
-        loading: action.payload.status,
+        requestInProgress: action.payload.status,
       }
     }
     case '[APP] SET_APP_READY': {

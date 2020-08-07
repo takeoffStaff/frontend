@@ -1,5 +1,6 @@
 import { Method, Body, Headers } from 'types/api'
 import { actions } from 'store/app/actions'
+import { notification } from 'antd'
 
 const PREFIX = '/api'
 
@@ -22,6 +23,12 @@ export async function http(url: string, method: Method = 'GET', body: Body = nul
   if (!res.ok) {
     const data = await res.json()
     window.store.dispatch(actions.setLoading(false))
+
+    notification.error({
+      message: 'Ошибка!',
+      description: data.message
+    })
+
     //eslint-disable-next-line
     throw { ...data }
   }

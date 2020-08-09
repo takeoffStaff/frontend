@@ -1,14 +1,9 @@
 import React, { useCallback } from 'react'
 import { Layout, Menu } from 'antd'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
 import { AppstoreOutlined, TeamOutlined, DashboardOutlined } from '@ant-design/icons'
-
-interface IMenuClickEventHandler {
-  key: React.Key
-  keyPath: React.Key[]
-  item: React.ReactInstance
-  domEvent: React.MouseEvent<HTMLElement>
-}
+import { IMenuClickEventHandler } from 'types/common'
 
 const { Sider } = Layout
 
@@ -27,7 +22,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <Sider collapsible>
-      <div className="logo" />
+      <Logo className="logo" />
       <Menu onClick={onClick} theme="dark" mode="inline" selectedKeys={[pathname]}>
         <Menu.Item key="/dashboard" icon={<DashboardOutlined />}>
           Dashboard
@@ -42,5 +37,11 @@ const Sidebar: React.FC = () => {
     </Sider>
   )
 }
+
+const Logo = styled.div`
+  height: 54px;
+  margin: 5px;
+  background: #ffffff;
+`
 
 export default Sidebar

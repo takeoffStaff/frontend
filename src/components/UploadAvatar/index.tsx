@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import { Upload, message } from 'antd'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
+import { http } from 'api/http'
+import { UploadChangeParam } from 'antd/lib/upload'
+import { UploadFile, RcCustomRequestOptions } from 'antd/lib/upload/interface'
 
 const UploadAvatar: React.FC = () => {
-  function getBase64(img: any, callback: any) {
-    const reader = new FileReader()
-    reader.addEventListener('load', () => callback(reader.result))
-    reader.readAsDataURL(img)
+
+  const customRequest = async (data: RcCustomRequestOptions) => {
+    let formData = new FormData()
+    formData.append('image', data.file)
+    console.log(data.file, 'file')
+    return await http('/upload/image', 'POST', formData, { 'Content-Type': 'multipart/form-data' }).then((response: any) => {
+      console.log(response, 'response')
+    })
   }
 
   function beforeUpload(file: File) {
@@ -22,19 +29,15 @@ const UploadAvatar: React.FC = () => {
   }
 
   const [loading, setLoading] = useState<boolean>(false)
-  const [imageUrl, setImageUrl] = useState<string | null>(null)
+  const [url, setUrl] = useState<string | null>(null)
 
-  const handleChange = (info: any) => {
+  const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
     if (info.file.status === 'uploading') {
       setLoading(true)
       return
     }
     if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (imageUrl: string) => {
-        setImageUrl(imageUrl)
-        setLoading(false)
-      })
+      setLoading(false)
     }
   }
 
@@ -50,11 +53,11 @@ const UploadAvatar: React.FC = () => {
       listType="picture-card"
       className="avatar-uploader"
       showUploadList={false}
-      action="/api/upload/image"
       beforeUpload={beforeUpload}
+      customRequest={customRequest}
       onChange={handleChange}
     >
-      {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+      {url ? <img src={url} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
     </Upload>
   )
 }

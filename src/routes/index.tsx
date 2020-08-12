@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import { SignUp, Dashboard, SignIn, Profile } from 'pages'
+import { SignUp, Dashboard, SignIn, Profile, Users } from 'pages'
 import { PrivateRoute } from 'components'
 import { CenterLayout, DefaultLayout } from 'layouts'
 import { useSelector } from 'react-redux'
@@ -26,6 +26,7 @@ const Routes: React.FC = () => {
           <DefaultLayout>
             <PrivateRoute exact path="/dashboard" component={Dashboard} authed={authed} />
             <PrivateRoute exact path="/profile" component={Profile} authed={authed} />
+            <PrivateRoute exact path="/users" component={Users} authed={true} />
             <Redirect to="/dashboard" />
           </DefaultLayout>
         </Switch>

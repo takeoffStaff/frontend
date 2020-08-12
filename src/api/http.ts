@@ -1,12 +1,13 @@
 import { Method, Body, Headers } from 'types/api'
 import { actions } from 'store/app/actions'
+import { actions as userActions } from 'store/user/actions'
 import { notification } from 'antd'
+import { replace } from 'helpers/redirect'
 
 const PREFIX = '/api'
 
-export async function http(url: string, method: Method = 'GET', body: Body = null, headers: Headers = {}) {
+export async function http (url: string, method: Method = 'GET', body: Body = null, headers: Headers = {}) {
   window.store.dispatch(actions.setLoading(true))
-
 
   const token = localStorage.getItem('token')
 
@@ -15,6 +16,12 @@ export async function http(url: string, method: Method = 'GET', body: Body = nul
   }
 
   const res = await fetch(`${PREFIX}${url}`, { method, body, headers })
+
+  if (res.status === 401) {
+    window.store.dispatch(userActions.destroyUserData())
+    localStorage.removeItem('token')
+    replace('/login')
+  }
 
   if (!res.ok) {
     const data = await res.json()

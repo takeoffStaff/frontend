@@ -1,7 +1,7 @@
-import { IUser } from 'types/user'
+import { IMainUser } from 'types/users'
 
 export interface IStore {
-  user: IUser
+  user: IMainUser
   app: {
     requestInProgress: boolean
     ready: boolean

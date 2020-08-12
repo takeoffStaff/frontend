@@ -1,5 +1,5 @@
 import { IRegistrationFormValues, IProfileFormValues, ILoginFormValues } from 'types/forms'
-import { IUser } from 'types/user'
+import { IMainUser } from 'types/users'
 
 export const actions = {
   fetchUserLogin: (loginValues: ILoginFormValues) =>
@@ -20,7 +20,7 @@ export const actions = {
       payload: { profileValues, userId }
     } as const),
 
-  setUserData: (user: IUser) =>
+  setUserData: (user: IMainUser) =>
     ({
       type: '[USER] SET_USER_DATA',
       payload: { user },

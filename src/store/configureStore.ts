@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import { createBrowserHistory } from 'history'
 
 import { reducer as userReducer } from 'store/user/reducer'
+import { reducer as usersReducer } from 'store/users/reducer'
 import { reducer as appReducer } from 'store/app/reducer'
 
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
@@ -13,6 +14,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 const reducers = combineReducers({
   user: userReducer,
+  users: usersReducer,
   app: appReducer,
 })
 

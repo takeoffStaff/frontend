@@ -2,7 +2,7 @@ import { actions as appActions } from 'store/app/actions'
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { actions } from './actions'
 import { notification } from 'antd'
-import { IUser } from 'types/user'
+import { IMainUser } from 'types/users'
 import { http } from 'api/http'
 import { omit } from 'lodash'
 
@@ -15,7 +15,7 @@ const onCatch = (error: any) => {
 function* fetchUserLogin(action: ReturnType<typeof actions.fetchUserLogin>) {
   try {
     // TODO: нужно разобраться с any!
-    const user: IUser = yield call(
+    const user: IMainUser = yield call(
       http as any,
       '/auth/login',
       'POST',
@@ -33,7 +33,7 @@ function* fetchUserLogin(action: ReturnType<typeof actions.fetchUserLogin>) {
 function* fetchUserRegistration(action: ReturnType<typeof actions.fetchUserRegistration>) {
   try {
     // TODO: нужно разобраться с any!
-    const user: IUser = yield call(
+    const user: IMainUser = yield call(
       http as any,
       '/auth/registration',
       'POST',
@@ -51,9 +51,9 @@ function* fetchUserRegistration(action: ReturnType<typeof actions.fetchUserRegis
 function* fetchUserUpdate(action: ReturnType<typeof actions.fetchUserUpdate>){
   try {
     const { profileValues, userId } = action.payload
-    const user: IUser = yield call(
+    const user: IMainUser = yield call(
       http as any,
-      '/user',
+      '/users',
       'PATCH',
       JSON.stringify({ ...profileValues, id: userId }),
       { 'Content-Type': 'application/json' }
@@ -76,8 +76,8 @@ function* checkUserAccessRights() {
   try {
     yield put(appActions.setAppReady(false))
 
-    const user: IUser = yield call(http, '/auth/check')
-    
+    const user: IMainUser = yield call(http, '/auth/check')
+
     yield put(actions.setUserData(user))
     yield localStorage.setItem('token', user.token)
     yield put(appActions.setAppReady(true))

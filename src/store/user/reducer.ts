@@ -1,12 +1,13 @@
 import { actions } from './actions'
 import { InferActionsTypes } from 'store/configureStore'
+import { IImage } from 'types/common'
 
 const initialState = {
   id: null as string | null,
   email: null as string | null,
   name: null as string | null,
   phone: null as string | null,
-  avatar: null as string | null,
+  image: null as IImage | null,
   token: null as string | null,
   authed: false,
 }

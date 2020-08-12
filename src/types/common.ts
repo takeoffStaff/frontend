@@ -4,3 +4,8 @@ export interface IMenuClickEventHandler {
   item: React.ReactInstance
   domEvent: React.MouseEvent<HTMLElement>
 }
+
+export interface IImage {
+  id: number
+  url: string
+}

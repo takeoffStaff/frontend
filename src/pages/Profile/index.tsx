@@ -1,10 +1,10 @@
 import React from 'react'
-import { UploadAvatar } from 'components'
+import { ProfileForm } from 'components/forms'
 
 const ProfilePage: React.FC = () => {
   return (
     <div>
-      <UploadAvatar />
+      <ProfileForm />
     </div>
   )
 }

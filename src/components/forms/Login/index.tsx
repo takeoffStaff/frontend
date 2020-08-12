@@ -5,7 +5,7 @@ import { Input, Button } from 'antd'
 import { FormItem, AuthForm } from 'styles/components'
 import { usePresenter } from './usePresenter'
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const { form, onSubmit, goToRegistration, requestInProgress } = usePresenter()
 
   return (

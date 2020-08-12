@@ -7,10 +7,6 @@ const PREFIX = '/api'
 export async function http(url: string, method: Method = 'GET', body: Body = null, headers: Headers = {}) {
   window.store.dispatch(actions.setLoading(true))
 
-  if (body) {
-    body = JSON.stringify(body)
-    headers['Content-Type'] = 'application/json'
-  }
 
   const token = localStorage.getItem('token')
 

@@ -1,9 +1,12 @@
 export interface IUser {
-  id: string
+  id: number
   email: string
   name: string
   phone: string
-  avatar: string
+  image: {
+    id: number
+    url: string
+  } | null
   authed: boolean
   token: string
 }

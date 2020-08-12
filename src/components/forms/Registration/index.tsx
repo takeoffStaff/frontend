@@ -6,7 +6,7 @@ import { Input, Tooltip, Button } from 'antd'
 import { FormItem, AuthForm } from 'styles/components'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 
-const RegistrationForm = () => {
+const RegistrationForm: React.FC = () => {
   const { form, onSubmit, requestInProgress, goToLogin } = usePresenter()
 
   return (

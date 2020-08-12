@@ -1,4 +1,4 @@
 export { default as PrivateRoute } from './PrivateRoute'
 export { default as Sidebar } from './Sidebar'
 export { default as Header } from './Header'
-export { default as UploadAvatar } from './UploadAvatar'
+export { default as UploadImage } from './UploadImage'

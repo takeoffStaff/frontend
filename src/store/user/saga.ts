@@ -6,29 +6,69 @@ import { IUser } from 'types/user'
 import { http } from 'api/http'
 import { omit } from 'lodash'
 
+const onCatch = (error: any) => {
+  console.error(error.message)
+  localStorage.removeItem('token')
+  put(actions.destroyUserData())
+}
+
 function* fetchUserLogin(action: ReturnType<typeof actions.fetchUserLogin>) {
   try {
     // TODO: нужно разобраться с any!
-    const user: IUser = yield call(http as any, '/auth/login', 'POST', { ...action.payload.loginValues })
+    const user: IUser = yield call(
+      http as any,
+      '/auth/login',
+      'POST',
+      JSON.stringify({ ...action.payload.loginValues }),
+      { 'Content-Type': 'application/json' }
+    )
+
     yield put(actions.setUserData(user))
     yield localStorage.setItem('token', user.token)
   } catch (error) {
-    console.error(error.message)
-    yield put(actions.destroyUserData())
+    onCatch(error)
   }
 }
 
 function* fetchUserRegistration(action: ReturnType<typeof actions.fetchUserRegistration>) {
   try {
     // TODO: нужно разобраться с any!
-    const user: IUser = yield call(http as any, '/auth/registration', 'POST', {
-      ...omit(action.payload.registrationValues, ['confirm']),
-    })
+    const user: IUser = yield call(
+      http as any,
+      '/auth/registration',
+      'POST',
+      JSON.stringify({ ...omit(action.payload.registrationValues, ['confirm'] )}),
+      { 'Content-Type': 'application/json' }
+    )
+
     yield put(actions.setUserData(user))
     yield localStorage.setItem('token', user.token)
   } catch (error) {
-    console.error(error.message)
-    yield put(actions.destroyUserData())
+    onCatch(error)
+  }
+}
+
+function* fetchUserUpdate(action: ReturnType<typeof actions.fetchUserUpdate>){
+  try {
+    const { profileValues, userId } = action.payload
+    const user: IUser = yield call(
+      http as any,
+      '/user',
+      'PATCH',
+      JSON.stringify({ ...profileValues, id: userId }),
+      { 'Content-Type': 'application/json' }
+    )
+
+    yield put(actions.setUserData(user))
+    yield localStorage.setItem('token', user.token)
+
+    yield notification.success({
+      message: 'Успех!',
+      description: 'Данные успешно изменены',
+    })
+
+  } catch (error) {
+    onCatch(error)
   }
 }
 
@@ -41,17 +81,14 @@ function* checkUserAccessRights() {
     yield put(actions.setUserData(user))
     yield localStorage.setItem('token', user.token)
     yield put(appActions.setAppReady(true))
-  
+
     yield notification.success({
       message: 'Успех!',
       description: 'Вы успешно авторизованы',
     })
+
   } catch (error) {
     console.error(error.message)
-    yield notification.error({
-      message: 'Ошибка!',
-      description: error.message,
-    })
     yield put(actions.destroyUserData())
     yield put(appActions.setAppReady(true))
   }
@@ -59,6 +96,7 @@ function* checkUserAccessRights() {
 
 export function* userSaga() {
   yield takeEvery('[USER] FETCH_USER_LOGIN', fetchUserLogin)
+  yield takeEvery('[USER] FETCH_USER_UPDATE', fetchUserUpdate)
   yield takeEvery('[USER] FETCH_USER_REGISTRATION', fetchUserRegistration)
   yield takeEvery('[USER] CHECK_USER_ACCESS_RIGHTS', checkUserAccessRights)
 }

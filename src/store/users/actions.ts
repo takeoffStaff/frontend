@@ -1,9 +1,11 @@
 import { IUser } from 'types/users'
+import { IRequestParams } from 'types/api'
 
 export const actions = {
-  fetchUsersRequest: () =>
+  fetchUsersRequest: (requestParams: IRequestParams) =>
     ({
-      type: '[USERS] FETCH_USERS_REQUEST',
+			type: '[USERS] FETCH_USERS_REQUEST',
+			payload: { requestParams }
     } as const),
 
   fetchUsersSuccess: (users: IUser[]) =>

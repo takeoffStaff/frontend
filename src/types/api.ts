@@ -11,3 +11,9 @@ export type Body =
   | null
 
 export type Headers = { [key: string]: string }
+
+export interface IRequestParams {
+	page?: number
+	perPage?: number
+	search?: string
+}

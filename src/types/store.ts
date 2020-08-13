@@ -12,4 +12,10 @@ export interface IStore {
     requestInProgress: boolean
     ready: boolean
   }
+  pagination: {
+    currentPage: number
+    totalPages: undefined | number
+		totalItems: undefined | number
+		perPage: number
+  }
 }

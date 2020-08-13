@@ -13,3 +13,14 @@ export interface IImage {
 export interface IError {
   message: string
 }
+
+export interface IPaginationMeta {
+  currentPage: number
+  totalItems: number
+	totalPages: number
+	perPage: number
+}
+
+export interface IPaginate<T> extends IPaginationMeta {
+  data: T
+}

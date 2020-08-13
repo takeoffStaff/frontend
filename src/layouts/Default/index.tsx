@@ -1,8 +1,9 @@
 import React from 'react'
 import { Layout } from 'antd'
 import { Sidebar, Header } from 'components'
+import styled from 'styled-components'
 
-const { Content, Footer } = Layout
+const { Content } = Layout
 
 const DefaultLayout: React.FC = ({ children }) => {
   return (
@@ -10,13 +11,20 @@ const DefaultLayout: React.FC = ({ children }) => {
       <Sidebar />
       <Layout>
         <Header />
-        <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-          <div style={{ padding: 24, textAlign: 'center' }}>{children}</div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Created by @Sugarman</Footer>
+        <StyledContent>{children}</StyledContent>
       </Layout>
     </Layout>
   )
 }
+
+const StyledContent = styled(Content)`
+  display: flex;
+  flex-direction: column;
+  margin: 0 16px;
+  max-height: calc(100vh - 64px);
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 16px 0 40px;
+`
 
 export default DefaultLayout

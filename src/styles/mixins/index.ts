@@ -12,4 +12,11 @@ const inlineSpace = (value: string) => `
   }
 `
 
-export default { displayFlex, inlineSpace }
+const stackSpace = (value: string) => `
+	margin-bottom: ${value};
+	&:last-child {
+		margin-bottom: 0;
+	}
+`
+
+export default { displayFlex, inlineSpace, stackSpace }

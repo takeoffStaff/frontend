@@ -18,9 +18,11 @@ export async function http (url: string, method: Method = 'GET', body: Body = nu
   const res = await fetch(`${PREFIX}${url}`, { method, body, headers })
 
   if (res.status === 401) {
+    window.store.dispatch(actions.setLoading(false))
     window.store.dispatch(userActions.destroyUserData())
     localStorage.removeItem('token')
     replace('/login')
+    return
   }
 
   if (!res.ok) {

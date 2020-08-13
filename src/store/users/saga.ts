@@ -7,12 +7,13 @@ function* fetchUsersList() {
   try {
     const users: IUser[] = yield call(http, '/users', 'GET', null, { 'Content-Type': 'application/json' })
 
-    yield put(actions.setUsersList(users))
+    yield put(actions.fetchUsersSuccess(users))
   } catch (error) {
     console.error(error)
+    yield put(actions.fetchUsersError(error.message))
   }
 }
 
 export function* usersSaga() {
-  yield takeEvery('[USERS] FETCH_USERS_LIST', fetchUsersList)
+  yield takeEvery('[USERS] FETCH_USERS_REQUEST', fetchUsersList)
 }

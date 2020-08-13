@@ -8,6 +8,7 @@ import { ConfigProvider } from 'antd'
 import ru from 'antd/es/locale/ru_RU'
 import { Provider } from 'react-redux'
 import { store } from 'store/configureStore'
+import 'moment/locale/ru'
 
 ReactDOM.render(
   <Provider store={store}>

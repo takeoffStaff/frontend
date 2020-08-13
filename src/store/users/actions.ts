@@ -1,15 +1,21 @@
 import { IUser } from 'types/users'
 
 export const actions = {
-  fetchUsersList: () =>
+  fetchUsersRequest: () =>
     ({
-      type: '[USERS] FETCH_USERS_LIST',
+      type: '[USERS] FETCH_USERS_REQUEST',
     } as const),
 
-  setUsersList: (users: IUser[]) =>
+  fetchUsersSuccess: (users: IUser[]) =>
     ({
-      type: '[USERS] SET_USERS_LIST',
-      payload: { users }
+      type: '[USERS] FETCH_USERS_SUCCESS',
+      payload: { users },
+    } as const),
+
+  fetchUsersError: (message: string) =>
+    ({
+      type: '[USERS] FETCH_USERS_ERROR',
+      payload: { message },
     } as const),
 
   destroyUsersList: () =>

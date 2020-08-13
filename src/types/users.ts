@@ -15,8 +15,6 @@ export interface IUser {
   email: string
   name: string
   phone: string
-  image: {
-    url: string
-  }
+  image: IImage | null
   createdAt: string
 }

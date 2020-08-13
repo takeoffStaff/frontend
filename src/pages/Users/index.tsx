@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { actions } from 'store/users/actions'
+import React from 'react'
+import { usePresenter } from './usePresenter'
+import { List } from 'antd'
+import { UserCard } from 'components/cards'
 
 const UsersPage: React.FC = () => {
-  const dispatch = useDispatch()
+  const { data, loading, error } = usePresenter()
 
-  useEffect(() => {
-    dispatch(actions.fetchUsersList())
-  }, [dispatch])
-
-  return <div>UsersPage</div>
+  return (
+    <List itemLayout="vertical" size="large" loading={loading}>
+      {data && data.map((user) => <UserCard key={user.id} user={user} />)}
+    </List>
+  )
 }
 
 export default UsersPage

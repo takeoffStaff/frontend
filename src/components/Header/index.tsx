@@ -4,14 +4,14 @@ import styled from 'styled-components'
 import { UserOutlined } from '@ant-design/icons'
 import { mixins } from 'styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { actions } from 'store/user/actions'
+import { actions } from 'store/auth/actions'
 import { useHistory } from 'react-router-dom'
 import { IMenuClickEventHandler } from 'types/common'
 import { IStore } from 'types/store'
 
 const Header: React.FC = () => {
   const dispatch = useDispatch()
-  const { image } = useSelector((store: IStore) => store.user)
+  const { authedUser } = useSelector((store: IStore) => store.auth)
 
   const {
     push,
@@ -41,9 +41,15 @@ const Header: React.FC = () => {
 
   return (
     <StyledHeader>
-      <Dropdown overlay={menu} placement="bottomLeft">
-        <StyledAvatar size="large" icon={<UserOutlined />} src={image ? image.url : undefined}/>
-      </Dropdown>
+      {authedUser && (
+        <Dropdown overlay={menu} placement="bottomLeft">
+          <StyledAvatar
+            size="large"
+            icon={<UserOutlined />}
+            src={authedUser.image ? authedUser.image.url : undefined}
+          />
+        </Dropdown>
+      )}
     </StyledHeader>
   )
 }

@@ -8,7 +8,7 @@ import { IStore } from 'types/store'
 import { Spin } from 'antd'
 
 const Routes: React.FC = () => {
-  const { authed } = useSelector((store: IStore) => store.user)
+  const { authed } = useSelector((store: IStore) => store.auth)
   const { ready } = useSelector((store: IStore) => store.app)
 
   if (ready) {

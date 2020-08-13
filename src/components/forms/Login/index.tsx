@@ -6,7 +6,7 @@ import { FormItem, AuthForm } from 'styles/components'
 import { usePresenter } from './usePresenter'
 
 const LoginForm: React.FC = () => {
-  const { form, onSubmit, goToRegistration, requestInProgress } = usePresenter()
+  const { form, onSubmit, goToRegistration, loading } = usePresenter()
 
   return (
     <AuthForm form={form} name="login" onFinish={onSubmit} scrollToFirstError>
@@ -38,7 +38,7 @@ const LoginForm: React.FC = () => {
       </FormItem>
 
       <Div>
-        <Button type="primary" htmlType="submit" loading={requestInProgress}>
+        <Button type="primary" htmlType="submit" loading={loading}>
           Войти
         </Button>
         <a href="/registration" onClick={goToRegistration}>

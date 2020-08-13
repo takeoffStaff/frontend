@@ -1,19 +1,23 @@
 import React from 'react'
-import { Input, Button, Form } from 'antd'
+import { Input, Button, Form, Spin } from 'antd'
 import { FormItem } from 'styles/components'
 import { usePresenter } from './usePresenter'
 import { UploadImage } from 'components'
 
 const ProfileForm: React.FC = () => {
-  const { form, onSubmit, requestInProgress, user } = usePresenter()
+  const { form, onSubmit, loading, authedUser } = usePresenter()
+
+  if (!authedUser) {
+    return <Spin size="large" />
+  }
 
   return (
     <Form form={form} name="profile" onFinish={onSubmit} scrollToFirstError>
-      <UploadImage initialValue={user.image} />
+      <UploadImage initialValue={authedUser.image} />
       <FormItem
         name="name"
         label="Никнейм"
-        initialValue={user.name}
+        initialValue={authedUser.name}
         rules={[
           {
             required: true,
@@ -27,7 +31,7 @@ const ProfileForm: React.FC = () => {
       <FormItem
         name="email"
         label="E-mail"
-        initialValue={user.email}
+        initialValue={authedUser.email}
         rules={[
           {
             type: 'email',
@@ -42,11 +46,11 @@ const ProfileForm: React.FC = () => {
         <Input autoComplete="new-password" />
       </FormItem>
 
-      <FormItem name="phone" label="Номер телефона" initialValue={user.phone}>
+      <FormItem name="phone" label="Номер телефона" initialValue={authedUser.phone}>
         <Input />
       </FormItem>
 
-      <Button type="primary" htmlType="submit" loading={requestInProgress}>
+      <Button type="primary" htmlType="submit" loading={loading}>
         Сохранить изменения
       </Button>
     </Form>

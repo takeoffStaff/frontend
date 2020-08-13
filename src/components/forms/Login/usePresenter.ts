@@ -3,15 +3,16 @@ import { SyntheticEvent, useCallback } from 'react'
 import { Store } from 'antd/lib/form/interface'
 import { ILoginFormValues } from 'types/forms'
 import { useHistory } from 'react-router-dom'
-import { actions } from 'store/user/actions'
+import { actions } from 'store/auth/actions'
 import { IStore } from 'types/store'
 import { Form } from 'antd'
 
 export const usePresenter = () => {
-  const { requestInProgress } = useSelector((store: IStore) => store.app)
-  const [form] = Form.useForm()
+	const [form] = Form.useForm()
   const history = useHistory()
-  const dispatch = useDispatch()
+	const dispatch = useDispatch()
+
+  const { loading } = useSelector((store: IStore) => store.auth)
 
   const onSubmit = useCallback(
     (values: Store) => {
@@ -28,5 +29,5 @@ export const usePresenter = () => {
     [history]
   )
 
-  return { form, onSubmit, goToRegistration, requestInProgress }
+  return { form, onSubmit, goToRegistration, loading }
 }

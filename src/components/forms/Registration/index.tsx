@@ -7,7 +7,7 @@ import { FormItem, AuthForm } from 'styles/components'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 
 const RegistrationForm: React.FC = () => {
-  const { form, onSubmit, requestInProgress, goToLogin } = usePresenter()
+  const { form, onSubmit, loading, goToLogin } = usePresenter()
 
   return (
     <AuthForm form={form} name="register" onFinish={onSubmit} scrollToFirstError>
@@ -89,7 +89,7 @@ const RegistrationForm: React.FC = () => {
       </FormItem>
 
       <Div>
-        <Button type="primary" htmlType="submit" loading={requestInProgress}>
+        <Button type="primary" htmlType="submit" loading={loading}>
           Регистрация
         </Button>
         <a href="/login" onClick={goToLogin}>

@@ -1,5 +1,5 @@
 import { IRegistrationFormValues, IProfileFormValues, ILoginFormValues } from 'types/forms'
-import { IMainUser } from 'types/users'
+import { IAuthedUser } from 'types/users'
 
 export const actions = {
   fetchUserLogin: (loginValues: ILoginFormValues) =>
@@ -14,16 +14,22 @@ export const actions = {
       payload: { registrationValues },
     } as const),
 
+  fetchUserSuccess: (user: IAuthedUser) =>
+    ({
+      type: '[USER] FETCH_USER_SUCCESS',
+      payload: { user },
+    } as const),
+
+  fetchUserError: (message: string) =>
+    ({
+      type: '[USER] FETCH_USER_ERROR',
+      payload: { message },
+    } as const),
+
   fetchUserUpdate: (profileValues: IProfileFormValues, userId: number) =>
     ({
       type: '[USER] FETCH_USER_UPDATE',
-      payload: { profileValues, userId }
-    } as const),
-
-  setUserData: (user: IMainUser) =>
-    ({
-      type: '[USER] SET_USER_DATA',
-      payload: { user },
+      payload: { profileValues, userId },
     } as const),
 
   destroyUserData: () =>

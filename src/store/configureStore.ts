@@ -2,7 +2,7 @@ import { rootSaga } from 'store/rootSaga'
 import createSagaMiddleware from 'redux-saga'
 import { createBrowserHistory } from 'history'
 
-import { reducer as userReducer } from 'store/user/reducer'
+import { reducer as authReducer } from 'store/auth/reducer'
 import { reducer as usersReducer } from 'store/users/reducer'
 import { reducer as appReducer } from 'store/app/reducer'
 import { reducer as paginationReducer } from 'store/pagination/reducer'
@@ -14,7 +14,7 @@ export const history = createBrowserHistory()
 const sagaMiddleware = createSagaMiddleware()
 
 const reducers = combineReducers({
-  user: userReducer,
+  auth: authReducer,
   users: usersReducer,
   app: appReducer,
   pagination: paginationReducer,

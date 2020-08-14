@@ -11,7 +11,6 @@ interface IProps {
 }
 
 const UploadImage: React.FC<IProps> = ({ initialValue }) => {
-
   function beforeUpload(file: File) {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
     if (!isJpgOrPng) {
@@ -59,6 +58,7 @@ const UploadImage: React.FC<IProps> = ({ initialValue }) => {
         listType="picture-card"
         className="avatar-uploader"
         showUploadList={false}
+        headers={{ Authorization: `Bearer ${localStorage.getItem('token')}` }}
         beforeUpload={beforeUpload}
         action="api/upload/image"
         onChange={handleChange}

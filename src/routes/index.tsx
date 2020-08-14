@@ -1,11 +1,12 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import { SignUp, Dashboard, SignIn, Profile, Users } from 'pages'
+import { BrowserRouter as Router, Route, Switch, Redirect, RouteComponentProps } from 'react-router-dom'
+import { SignUp, Dashboard, SignIn, Profile, Users, Articles, CreateArticle } from 'pages'
 import { PrivateRoute } from 'components'
 import { CenterLayout, DefaultLayout } from 'layouts'
 import { useSelector } from 'react-redux'
 import { IStore } from 'types/store'
 import { Spin } from 'antd'
+import { setHistory } from 'helpers/redirect'
 
 const Routes: React.FC = () => {
   const { authed } = useSelector((store: IStore) => store.auth)
@@ -14,6 +15,7 @@ const Routes: React.FC = () => {
   if (ready) {
     return (
       <Router>
+        <Route component={HistorySetter} />
         <Switch>
           {!authed && (
             <CenterLayout>
@@ -26,7 +28,9 @@ const Routes: React.FC = () => {
           <DefaultLayout>
             <PrivateRoute exact path="/dashboard" component={Dashboard} authed={authed} />
             <PrivateRoute exact path="/profile" component={Profile} authed={authed} />
-            <PrivateRoute exact path="/users" component={Users} authed={true} />
+            <PrivateRoute exact path="/users" component={Users} authed={authed} />
+            <PrivateRoute exact path="/articles" component={Articles} authed={authed} />
+            <PrivateRoute exact path="/articles/create" component={CreateArticle} authed={authed} />
             <Redirect to="/dashboard" />
           </DefaultLayout>
         </Switch>
@@ -39,6 +43,11 @@ const Routes: React.FC = () => {
       </CenterLayout>
     )
   }
+}
+
+function HistorySetter({ history }: RouteComponentProps) {
+  setHistory(history)
+  return null
 }
 
 export default Routes

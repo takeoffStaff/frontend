@@ -20,11 +20,10 @@ const DefaultLayout: React.FC = ({ children }) => {
 const StyledContent = styled(Content)`
   display: flex;
   flex-direction: column;
-  margin: 0 16px;
   max-height: calc(100vh - 64px);
   overflow: hidden;
   overflow-y: scroll;
-  padding: 16px 0 40px;
+  padding: 16px 16px 40px;
 `
 
 export default DefaultLayout

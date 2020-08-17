@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { actions } from 'store/pagination/actions'
 import { Pagination as AntPagination } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,13 +6,8 @@ import { IStore } from 'types/store'
 
 const Pagination: React.FC = () => {
   const dispatch = useDispatch()
-  const { currentPage, totalItems, perPage } = useSelector((store: IStore) => store.pagination)
 
-  useEffect(() => {
-    return () => {
-      dispatch(actions.setCurrentPage(1))
-    }
-  }, [dispatch])
+  const { currentPage, totalItems, perPage } = useSelector((store: IStore) => store.pagination)
 
   const onChange = useCallback(
     (page: number) => {
@@ -23,7 +18,7 @@ const Pagination: React.FC = () => {
 
   return (
     <AntPagination
-      style={{ marginTop: 'auto' }}
+      style={{ marginTop: '20px' }}
       current={currentPage}
       pageSize={perPage}
       total={totalItems}

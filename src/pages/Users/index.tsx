@@ -1,37 +1,36 @@
 import React, { memo } from 'react'
-import { usePresenter } from './usePresenter'
-import { List, Spin } from 'antd'
+import { List } from 'antd'
 import { UserCard } from 'components/cards'
-import { Pagination } from 'components'
-import styled from 'styled-components'
+import { Pagination, Spinner } from 'components'
 import { IUser } from 'types/users'
+import { actions } from 'store/users/actions'
+import { useFetchData } from 'hooks/fetchData.hook'
 
 const UsersPage: React.FC = () => {
-  const { data, loading, error } = usePresenter()
+  const { data, loading, error } = useFetchData({
+    storeName: 'users',
+    fetchAction: actions.fetchUsersListRequest,
+    destroyDataAction: actions.destroyUsersList,
+  })
+
+  if (loading) {
+    return <Spinner />
+  }
 
   return (
-    <>
-      {loading && <Spinner size="large" />}
-      {data && !loading && <Content data={data} />}
+    <React.Fragment>
+      {!loading && !error && data && <ItemList data={data as IUser[]} />}
       <Pagination />
-    </>
+    </React.Fragment>
   )
 }
 
-const Content: React.FC<{ data: IUser[] }> = memo(({ data }) => (
+const ItemList: React.FC<{ data: IUser[] }> = memo(({ data }) => (
   <List itemLayout="vertical" size="large">
     {data.map((user) => (
       <UserCard key={user.id} user={user} />
     ))}
   </List>
 ))
-
-const Spinner = styled(Spin)`
-  height: calc(100vh - 172px);
-  /* width: 100%; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
 
 export default UsersPage

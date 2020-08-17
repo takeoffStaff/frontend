@@ -6,6 +6,10 @@ import { mixins } from 'styles'
 import moment from 'moment'
 
 const UserCard: React.FC<{ user: IUser }> = ({ user }) => {
+  if (!user) {
+    return null
+  }
+
   const { image, name, email, phone, createdAt } = user
   return (
     <Card>
@@ -28,6 +32,11 @@ const Row: React.FC<{ label: string; value: string }> = ({ label, value }) => (
     <Right className="right">{value}</Right>
   </div>
 )
+
+const Right = styled.span`
+  opacity: 0.8;
+  margin-left: 6px;
+`
 
 const Card = styled.div`
   ${mixins.displayFlex('row', 'flex-start', 'flex-start')}
@@ -56,11 +65,6 @@ const Card = styled.div`
     font-size: 18px;
     font-weight: bold;
   }
-`
-
-const Right = styled.span`
-  opacity: 0.8;
-  margin-left: 6px;
 `
 
 const StyledAvatar = styled(Avatar)`

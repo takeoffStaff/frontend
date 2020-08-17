@@ -34,11 +34,12 @@ const RegistrationForm: React.FC = () => {
         rules={[
           {
             min: 6,
-            message: 'Минимальная длина пароля 6 символов',
+						message: 'Минимальная длина пароля 6 символов',
+						whitespace: true,
           },
           {
             required: true,
-            message: 'Укажите пароль',
+						message: 'Укажите пароль',
           },
         ]}
         hasFeedback
@@ -54,7 +55,7 @@ const RegistrationForm: React.FC = () => {
         rules={[
           {
             required: true,
-            message: 'Подтвердите пароль',
+						message: 'Подтвердите пароль',
           },
           ({ getFieldValue }) => ({
             validator(rule, value) {

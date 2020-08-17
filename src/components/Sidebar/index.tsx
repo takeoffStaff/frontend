@@ -4,10 +4,14 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { AppstoreOutlined, TeamOutlined, DashboardOutlined } from '@ant-design/icons'
 import { IMenuClickEventHandler } from 'types/common'
+import { actions } from 'store/pagination/actions'
+import { useDispatch } from 'react-redux'
 
 const { Sider } = Layout
 
 const Sidebar: React.FC = () => {
+  const dispatch = useDispatch()
+
   const {
     push,
     location: { pathname },
@@ -15,9 +19,14 @@ const Sidebar: React.FC = () => {
 
   const onClick = useCallback(
     ({ key }: IMenuClickEventHandler) => {
+      if (key === pathname) {
+        return
+      }
+
       push(String(key))
+      dispatch(actions.setCurrentPage(1))
     },
-    [push]
+    [push, dispatch, pathname]
   )
 
   return (

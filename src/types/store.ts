@@ -1,5 +1,6 @@
 import { IAuthedUser, IUser } from 'types/users'
 import { IError } from './common'
+import { IArticleBrief } from './articles'
 
 export interface IStore {
   auth: {
@@ -15,6 +16,14 @@ export interface IStore {
   }
   app: {
     ready: boolean
+  }
+  editor: {
+    blocks: any[]
+  }
+  articles: {
+    data: IArticleBrief[] | null
+    loading: boolean
+    error: IError | null
   }
   pagination: {
     currentPage: number

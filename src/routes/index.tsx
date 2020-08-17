@@ -1,11 +1,9 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect, RouteComponentProps } from 'react-router-dom'
-import { SignUp, Dashboard, SignIn, Profile, Users, Articles, CreateArticle } from 'pages'
-import { PrivateRoute } from 'components'
+import { PrivateRoute, Spinner } from 'components'
 import { CenterLayout, DefaultLayout } from 'layouts'
 import { useSelector } from 'react-redux'
 import { IStore } from 'types/store'
-import { Spin } from 'antd'
 import { setHistory } from 'helpers/redirect'
 
 const Routes: React.FC = () => {
@@ -19,19 +17,23 @@ const Routes: React.FC = () => {
         <Switch>
           {!authed && (
             <CenterLayout>
-              <Route exact path="/registration" component={SignUp} />
-              <Route exact path="/login" component={SignIn} />
-              <Redirect to="/login" />
+              <Suspense fallback={<Spinner />}>
+                <Route exact path="/registration" component={lazy(() => import('pages/SignUp'))} />
+                <Route exact path="/login" component={lazy(() => import('pages/SignIn'))} />
+                <Redirect to="/login" />
+              </Suspense>
             </CenterLayout>
           )}
 
           <DefaultLayout>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} authed={authed} />
-            <PrivateRoute exact path="/profile" component={Profile} authed={authed} />
-            <PrivateRoute exact path="/users" component={Users} authed={authed} />
-            <PrivateRoute exact path="/articles" component={Articles} authed={authed} />
-            <PrivateRoute exact path="/articles/create" component={CreateArticle} authed={authed} />
-            <Redirect to="/dashboard" />
+            <Suspense fallback={<Spinner />}>
+              <PrivateRoute exact path="/dashboard" component={lazy(() => import('pages/Dashboard'))} />
+              <PrivateRoute exact path="/profile" component={lazy(() => import('pages/Profile'))} />
+              <PrivateRoute exact path="/users" component={lazy(() => import('pages/Users'))} />
+              <PrivateRoute exact path="/articles" component={lazy(() => import('pages/Articles'))} />
+              <PrivateRoute exact path="/articles/create" component={lazy(() => import('pages/CreateArticle'))} />
+              <Redirect to="/dashboard" />
+            </Suspense>
           </DefaultLayout>
         </Switch>
       </Router>
@@ -39,7 +41,7 @@ const Routes: React.FC = () => {
   } else {
     return (
       <CenterLayout>
-        <Spin size="large" />
+        <Spinner />
       </CenterLayout>
     )
   }

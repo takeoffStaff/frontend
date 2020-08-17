@@ -1,31 +1,30 @@
 import { actions } from './actions'
 import { InferActionsTypes } from 'store/configureStore'
-import { IUser } from 'types/users'
 import { IError } from 'types/common'
+import { IArticleBrief } from 'types/articles'
 
 const initialState = {
-  data: null as IUser[] | null,
+  data: null as IArticleBrief[] | null,
   loading: false,
   error: null as IError | null,
 }
 
 export const reducer = (state = initialState, action: InferActionsTypes<typeof actions>) => {
   switch (action.type) {
-    case '[USERS] FETCH_USERS_REQUEST':
+    case '[ARTICLES] FETCH_ARTICLES_LIST':
       return {
         ...state,
         loading: true,
-        data: null,
       }
-    case '[USERS] FETCH_USERS_SUCCESS': {
+    case '[ARTICLES] FETCH_ARTILCES_LIST_SUCCESS': {
       return {
         ...state,
-        data: action.payload.users,
+        data: action.payload.articles,
         loading: false,
         error: null,
       }
     }
-    case '[USERS] FETCH_USERS_ERROR':
+    case '[ARTICLES] FETCH_ARTICLES_LIST_ERROR':
       return {
         ...state,
         data: null,
@@ -34,7 +33,7 @@ export const reducer = (state = initialState, action: InferActionsTypes<typeof a
           message: action.payload.message,
         },
       }
-    case '[USERS] DESTROY_USERS_LIST': {
+    case '[ARTICLES] DESTROY_ARTICLES_LIST': {
       return {
         ...state,
         data: null,

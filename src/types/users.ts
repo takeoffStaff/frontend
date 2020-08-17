@@ -6,7 +6,11 @@ export interface IUser {
   name: string
   phone: string
   image: IImage | null
-  createdAt: string
+	createdAt: string
+	articles: {
+		title: string
+		description: string
+	}
 }
 
 export interface IAuthedUser extends IUser {

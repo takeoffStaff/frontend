@@ -17,3 +17,8 @@ export interface IProfileFormValues {
   phone: string
   image: number
 }
+
+export interface IArticleFormValues {
+	title: string
+	description: string
+}

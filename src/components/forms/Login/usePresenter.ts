@@ -2,15 +2,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SyntheticEvent, useCallback } from 'react'
 import { Store } from 'antd/lib/form/interface'
 import { ILoginFormValues } from 'types/forms'
-import { useHistory } from 'react-router-dom'
 import { actions } from 'store/auth/actions'
 import { IStore } from 'types/store'
 import { Form } from 'antd'
+import { redirect } from 'helpers/redirect'
 
 export const usePresenter = () => {
-	const [form] = Form.useForm()
-  const history = useHistory()
-	const dispatch = useDispatch()
+  const [form] = Form.useForm()
+  const dispatch = useDispatch()
 
   const { loading } = useSelector((store: IStore) => store.auth)
 
@@ -21,13 +20,10 @@ export const usePresenter = () => {
     [dispatch]
   )
 
-  const goToRegistration = useCallback(
-    (event: SyntheticEvent) => {
-      event.preventDefault()
-      history.push('/registration')
-    },
-    [history]
-  )
+  const goToRegistration = useCallback((event: SyntheticEvent) => {
+    event.preventDefault()
+    redirect('/registration')
+  }, [])
 
   return { form, onSubmit, goToRegistration, loading }
 }

@@ -6,7 +6,7 @@ const CreateArticlePage: React.FC = () => {
   return (
     <div>
       <ArticleForm />
-      <TextEditor />
+      <TextEditor isEmpty />
     </div>
   )
 }

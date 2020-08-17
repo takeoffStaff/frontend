@@ -8,6 +8,7 @@ import { reducer as appReducer } from 'store/app/reducer'
 import { reducer as paginationReducer } from 'store/pagination/reducer'
 import { reducer as editorReducer } from 'store/editor/reducer'
 import { reducer as articlesReducer } from 'store/articles/reducer'
+import { reducer as articleReducer } from 'store/article/reducer'
 
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   pagination: paginationReducer,
   editor: editorReducer,
   articles: articlesReducer,
+  article: articleReducer,
 })
 
 export const store = createStore(

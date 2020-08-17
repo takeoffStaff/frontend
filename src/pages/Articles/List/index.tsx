@@ -6,7 +6,7 @@ import { IArticleBrief } from 'types/articles'
 import { ArticleCard } from 'components/cards'
 import styled from 'styled-components'
 
-const ArticlesPage: React.FC = () => {
+const ArticlesListPage: React.FC = () => {
   const { data, loading, error, goToCreateArticle } = usePresenter()
 
   if (loading) {
@@ -34,7 +34,7 @@ const ItemList: React.FC<{ data: IArticleBrief[] }> = memo(({ data }) => (
 ))
 
 const StyledList = styled(List)`
-	margin-top: 20px;
+  margin-top: 20px;
 `
 
-export default ArticlesPage
+export default ArticlesListPage

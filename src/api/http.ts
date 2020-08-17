@@ -22,18 +22,15 @@ export async function http(url: string, method: Method = 'GET', body: Body = nul
 	}
 
   if (!res.ok) {
-    const data = await res.json()
+    const error = await res.json()
 
     notification.error({
       message: 'Ошибка!',
-      description: data.message,
+      description: error.message,
     })
 
-    //eslint-disable-next-line
-    throw { ...data }
+    throw new Error(error)
   }
 
-  const data = await res.json()
-
-  return data
+  return await res.json()
 }

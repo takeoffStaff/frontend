@@ -4,7 +4,7 @@ import { FormItem } from 'styles/components'
 import { usePresenter } from './usePresenter'
 
 interface IProps {
-	buttonLabel?: string
+  buttonLabel?: string
 }
 
 const ArticleForm: React.FC<IProps> = ({ buttonLabel }) => {
@@ -25,7 +25,7 @@ const ArticleForm: React.FC<IProps> = ({ buttonLabel }) => {
         <Input autoComplete="new-password" />
       </FormItem>
 
-			<FormItem
+      <FormItem
         name="description"
         label="Описание"
         rules={[
@@ -35,7 +35,7 @@ const ArticleForm: React.FC<IProps> = ({ buttonLabel }) => {
           },
         ]}
       >
-        <Input.TextArea />
+        <Input.TextArea rows={5} />
       </FormItem>
 
       <Button type="primary" htmlType="submit">

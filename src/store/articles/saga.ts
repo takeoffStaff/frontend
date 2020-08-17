@@ -6,16 +6,6 @@ import { actions as paginateActions } from 'store/pagination/actions'
 import { IPaginate } from 'types/common'
 import { omit } from 'lodash'
 
-function* fetchArticleSave(action: ReturnType<typeof actions.fetchArticleSave>) {
-  try {
-    yield call(http as any, '/articles', 'POST', JSON.stringify({ ...action.payload.article }), {
-      'Content-Type': 'application/json',
-    })
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 function* fetchArticlesList(action: ReturnType<typeof actions.fetchArticlesList>) {
   try {
     const { page, perPage } = action.payload.requestParams
@@ -31,6 +21,5 @@ function* fetchArticlesList(action: ReturnType<typeof actions.fetchArticlesList>
 }
 
 export function* articlesSaga() {
-  yield takeEvery('[ARTICLES] FETCH_ARTICLE_SAVE', fetchArticleSave)
   yield takeEvery('[ARTICLES] FETCH_ARTICLES_LIST', fetchArticlesList)
 }

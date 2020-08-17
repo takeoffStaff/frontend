@@ -1,6 +1,6 @@
 import { IAuthedUser, IUser } from 'types/users'
 import { IError } from './common'
-import { IArticleBrief } from './articles'
+import { IArticleBrief, IArticle } from './articles'
 
 export interface IStore {
   auth: {
@@ -22,6 +22,11 @@ export interface IStore {
   }
   articles: {
     data: IArticleBrief[] | null
+    loading: boolean
+    error: IError | null
+  }
+  article: {
+    data: IArticle | null
     loading: boolean
     error: IError | null
   }

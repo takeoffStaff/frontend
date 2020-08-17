@@ -21,19 +21,6 @@ export const usePresenter = ({ description, author, createdAt, updatedAt, articl
 
   const [briefDescription, setBriefDescription] = useState<string>('')
 
-  useEffect(() => {
-    if (description.length > 350) {
-      const desc = description.slice(0, 350) + '...'
-      setBriefDescription(desc)
-    } else {
-      setBriefDescription(description)
-    }
-  }, [description])
-
-  const goToArticle = useCallback(() => {
-    redirect(`/articles/${articleId}`)
-  }, [articleId])
-
   const isOwner = authedUser && authedUser.id === author.id
   const buttonLabel = isOwner ? 'Редактировать статью' : 'Посмотреть статью'
 
@@ -44,6 +31,20 @@ export const usePresenter = ({ description, author, createdAt, updatedAt, articl
   ) : (
     author.name
   )
+
+  useEffect(() => {
+    if (description.length > 350) {
+      const desc = description.slice(0, 350) + '...'
+      setBriefDescription(desc)
+    } else {
+      setBriefDescription(description)
+    }
+  }, [description])
+
+  const goToArticle = useCallback(() => {
+    const path = isOwner ? `/articles/edit/${articleId}` : `/articles/${articleId}`
+    redirect(path)
+  }, [articleId, isOwner])
 
   return {
     briefDescription,

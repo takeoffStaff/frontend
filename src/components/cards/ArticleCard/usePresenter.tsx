@@ -42,7 +42,7 @@ export const usePresenter = ({ description, author, createdAt, updatedAt, articl
   }, [description])
 
   const goToArticle = useCallback(() => {
-    const path = isOwner ? `/articles/edit/${articleId}` : `/articles/${articleId}`
+    const path = isOwner ? `/articles/edit/${articleId}` : `/articles/show/${articleId}`
     redirect(path)
   }, [articleId, isOwner])
 

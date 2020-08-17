@@ -10,15 +10,21 @@ interface IProps {
 }
 
 const TextEditor: React.FC<IProps> = ({ isEmpty }) => {
-  const { blocks } = useSelector((store: IStore) => store.editor)
+  const blocks = useSelector((store: IStore) => store.article.data && store.article.data.blocks)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
+    if (blocks) {
+      dispatch(actions.setEditorBlocks(blocks))
+    } else {
+      dispatch(actions.setEditorBlocks([]))
+    }
+
     return () => {
-			if (blocks) {
-				dispatch(actions.destroyEditorBlocks())
-			}
+      if (blocks) {
+        dispatch(actions.destroyEditorBlocks())
+      }
     }
   }, [dispatch, blocks])
 
@@ -27,7 +33,7 @@ const TextEditor: React.FC<IProps> = ({ isEmpty }) => {
       dispatch(actions.setEditorBlocks(data.blocks))
     },
     [dispatch]
-	)
+  )
 
   if (!blocks && !isEmpty) {
     return null
@@ -40,7 +46,7 @@ const TextEditor: React.FC<IProps> = ({ isEmpty }) => {
       tools={editorTools}
       data={{
         time: 1554920381017,
-        blocks,
+        blocks: blocks || [],
         version: '2.12.4',
       }}
     />

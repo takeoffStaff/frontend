@@ -31,9 +31,10 @@ const Routes: React.FC = () => {
               <PrivateRoute exact path="/profile" component={lazy(() => import('pages/Profile'))} />
               <PrivateRoute exact path="/users" component={lazy(() => import('pages/Users'))} />
 
-              <PrivateRoute exact path="/articles" component={lazy(() => import('pages/Articles/List'))} />
-              <PrivateRoute exact path="/articles/create" component={lazy(() => import('pages/Articles/Create'))} />
-              <PrivateRoute exact path="/articles/edit/:id" component={lazy(() => import('pages/Articles/Edit'))} />
+              <PrivateRoute exact path="/articles" component={lazy(() => import('pages/articles/List'))} />
+              <PrivateRoute exact path="/articles/create" component={lazy(() => import('pages/articles/Create'))} />
+              <PrivateRoute exact path="/articles/show/:id" component={lazy(() => import('pages/articles/Show'))} />
+              <PrivateRoute exact path="/articles/edit/:id" component={lazy(() => import('pages/articles/Edit'))} />
 
               <Redirect to="/dashboard" />
             </Suspense>

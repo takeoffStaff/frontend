@@ -2,7 +2,7 @@ import { actions } from './actions'
 import { InferActionsTypes } from 'store/configureStore'
 
 const initialState = {
-  blocks: null as any,
+  blocks: [] as any[],
 }
 
 export const reducer = (state = initialState, action: InferActionsTypes<typeof actions>) => {
@@ -15,7 +15,7 @@ export const reducer = (state = initialState, action: InferActionsTypes<typeof a
     case '[EDITOR] DESTROY_EDITOR_BLOCKS':
       return {
         ...state,
-        blocks: null,
+        blocks: [],
       }
     default:
       return state

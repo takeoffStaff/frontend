@@ -9,27 +9,26 @@ import { useHistory } from 'react-router'
 
 export const usePresenter = () => {
   const [form] = Form.useForm()
-	const dispatch = useDispatch()
-	const { goBack } = useHistory()
+  const dispatch = useDispatch()
+  const { goBack } = useHistory()
 
   const { blocks } = useSelector((store: IStore) => store.editor)
   const { authedUser } = useSelector((store: IStore) => store.auth)
-	const currentArticle = useSelector((store: IStore) => store.article.data)
+  const currentArticle = useSelector((store: IStore) => store.article.data)
 
   useEffect(() => {
     if (!currentArticle) {
       return
-		}
+    }
 
-		if (authedUser && currentArticle.author.id !== authedUser.id) {
+    if (authedUser && currentArticle.author.id !== authedUser.id) {
+      notification.error({
+        message: 'Ошибка!',
+        description: 'Вы не можете редактировать эту статью',
+      })
 
-			notification.error({
-				message: 'Ошибка!',
-				description: 'Вы не можете редактировать эту статью'
-			})
-
-			goBack()
-		}
+      goBack()
+    }
 
     form.setFieldsValue({
       title: currentArticle.title,
@@ -45,7 +44,7 @@ export const usePresenter = () => {
 
       const article: any = {
         ...(values as IArticleFormValues),
-        blocks: blocks || [],
+        blocks: blocks,
         authorId: authedUser.id,
       }
 

@@ -10,7 +10,7 @@ export async function http(url: string, method: Method = 'GET', body: Body = nul
 
   if (token) {
     headers['Authorization'] = `Bearer ${token}`
-	}
+  }
 
   const res = await fetch(`${PREFIX}${url}`, { method, body, headers })
 
@@ -19,7 +19,7 @@ export async function http(url: string, method: Method = 'GET', body: Body = nul
     localStorage.removeItem('token')
     redirect('/login')
     return
-	}
+  }
 
   if (!res.ok) {
     const error = await res.json()
@@ -29,7 +29,7 @@ export async function http(url: string, method: Method = 'GET', body: Body = nul
       description: error.message,
     })
 
-    throw new Error(error)
+    throw new Error(error.message)
   }
 
   return await res.json()

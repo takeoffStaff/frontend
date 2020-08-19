@@ -4,6 +4,7 @@ import { BlocksType } from 'types/editor'
 
 const initialState = {
   blocks: [] as BlocksType,
+  contentIsReady: true,
 }
 
 export const reducer = (state = initialState, action: InferActionsTypes<typeof actions>) => {
@@ -18,6 +19,12 @@ export const reducer = (state = initialState, action: InferActionsTypes<typeof a
         ...state,
         blocks: [],
       }
+    case '[EDITOR] SET_CONTENT_READY_STATUS': {
+      return {
+        ...state,
+        contentIsReady: action.payload.status,
+      }
+    }
     default:
       return state
   }

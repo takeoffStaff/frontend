@@ -29,5 +29,13 @@ export const usePresenter = () => {
     [dispatch]
   )
 
-  return { blocks, onData }
+  const onFocus = useCallback(() => {
+    dispatch(actions.setContentReadyStatus(false))
+  }, [dispatch])
+
+  const onBlur = useCallback(() => {
+    dispatch(actions.setContentReadyStatus(true))
+  }, [dispatch])
+
+  return { blocks, onData, onFocus, onBlur }
 }

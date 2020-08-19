@@ -25,6 +25,7 @@ export interface IStore {
   }
   editor: {
     blocks: BlocksType
+    contentIsReady: boolean
   }
   articles: {
     data: IArticleBrief[] | null

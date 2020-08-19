@@ -8,14 +8,14 @@ import { mixins } from 'styles'
 
 const EditArticlePage: React.FC = () => {
 
-  const { onSubmit, onDeleteArticle } = usePresenter()
+  const { onSubmit, onDeleteArticle, contentIsReady } = usePresenter()
 
   return (
     <Page>
       <ArticleForm onSubmit={onSubmit} />
       <TextEditor />
       <div className="buttons-group">
-        <Button form="articleForm" htmlType="submit">Сохранить изменения</Button>
+        <Button type="primary" form="articleForm" disabled={!contentIsReady} htmlType="submit">Сохранить изменения</Button>
         <Button danger onClick={onDeleteArticle}>Удалить статью</Button>
       </div>
     </Page>

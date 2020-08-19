@@ -12,7 +12,7 @@ export const usePresenter = () => {
   const dispatch = useDispatch()
   const { id } = useParams<{ id: string }>()
 
-  const { blocks } = useSelector((store: IStore) => store.editor)
+  const { blocks, contentIsReady } = useSelector((store: IStore) => store.editor)
   const editedArticle = useSelector((store: IStore) => store.article)
   const { authedUser } = useSelector((store: IStore) => store.auth)
 
@@ -46,5 +46,5 @@ export const usePresenter = () => {
     dispatch(actions.fetchDeleteArticle(editedArticle.data.id))
   }, [dispatch, editedArticle.data])
 
-  return { onSubmit, onDeleteArticle }
+  return { onSubmit, onDeleteArticle, contentIsReady }
 }

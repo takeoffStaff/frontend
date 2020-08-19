@@ -9,7 +9,7 @@ import { ICreateArticleValues } from 'types/articles'
 export const usePresenter = () => {
   const dispatch = useDispatch()
 
-  const { blocks } = useSelector((store: IStore) => store.editor)
+  const { blocks, contentIsReady } = useSelector((store: IStore) => store.editor)
   const { authedUser } = useSelector((store: IStore) => store.auth)
 
   const onSubmit = useCallback(
@@ -27,5 +27,5 @@ export const usePresenter = () => {
     [dispatch, blocks, authedUser]
   )
 
-  return { onSubmit }
+  return { onSubmit, contentIsReady }
 }

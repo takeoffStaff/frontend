@@ -10,14 +10,14 @@ interface IProps {
 
 const TextEditor: React.FC<IProps> = ({ isEmpty }) => {
 
-  const { blocks, onData } = usePresenter()
+  const { blocks, onData, onBlur, onFocus } = usePresenter()
 
   if (!blocks && !isEmpty) {
     return null
   }
 
   return (
-    <Wrapper>
+    <Wrapper onBlur={onBlur} onFocus={onFocus}>
       <Editor
         autofocus
         onData={onData}

@@ -6,7 +6,6 @@ import { IStore } from 'types/store'
 import { IArticleFormValues } from 'types/forms'
 import { useParams } from 'react-router'
 import { omit } from 'lodash'
-import { redirect } from 'helpers/redirect'
 import { IUpdateArticleValues } from 'types/articles'
 
 export const usePresenter = () => {
@@ -47,11 +46,5 @@ export const usePresenter = () => {
     dispatch(actions.fetchDeleteArticle(editedArticle.data.id))
   }, [dispatch, editedArticle.data])
 
-  const onPreview = useCallback(() => {
-    if (!editedArticle.data) { return }
-
-    redirect(`/articles/show/preview`)
-  }, [editedArticle.data])
-
-  return { onSubmit, onDeleteArticle, onPreview }
+  return { onSubmit, onDeleteArticle }
 }

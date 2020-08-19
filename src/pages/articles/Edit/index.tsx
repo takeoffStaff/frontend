@@ -8,14 +8,13 @@ import { mixins } from 'styles'
 
 const EditArticlePage: React.FC = () => {
 
-  const { onSubmit, onDeleteArticle, onPreview } = usePresenter()
+  const { onSubmit, onDeleteArticle } = usePresenter()
 
   return (
     <Page>
       <ArticleForm onSubmit={onSubmit} />
       <TextEditor />
-      <div className="button-group">
-        <Button onClick={onPreview} >Предпросмотр</Button>
+      <div className="buttons-group">
         <Button form="articleForm" htmlType="submit">Сохранить изменения</Button>
         <Button danger onClick={onDeleteArticle}>Удалить статью</Button>
       </div>
@@ -24,7 +23,7 @@ const EditArticlePage: React.FC = () => {
 }
 
 const Page = styled.div`
-  .button-group {
+  .buttons-group {
     position: absolute;
     bottom: 50px;
     right: 50px;

@@ -1,24 +1,11 @@
-import React, { useEffect, lazy } from 'react'
-import { useParams } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
-import { actions } from 'store/article/actions'
-import { IStore } from 'types/store'
+import React, { lazy } from 'react'
 import { Spinner } from 'components'
 import styled from 'styled-components'
+import { usePresenter } from './usePresenter'
 
 const ShowArticlePage: React.FC = () => {
-  const { id } = useParams<{ id: string }>()
-  const dispatch = useDispatch()
 
-  const { data, loading, error } = useSelector((store: IStore) => store.article)
-
-  useEffect(() => {
-    dispatch(actions.fetchArticleRequest(id))
-
-    return () => {
-      dispatch(actions.destroyArticle())
-    }
-  }, [dispatch, id])
+  const { data, loading, error } = usePresenter()
 
   if (loading) {
     return <Spinner />
@@ -47,6 +34,7 @@ const ShowArticlePage: React.FC = () => {
 const Page = styled.div`
   width: 50%;
   margin: 0 auto;
+  word-break: break-all;
 
   > h1 {
     font-size: 2.5rem;

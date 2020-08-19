@@ -2,11 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { mixins } from 'styles'
 import { IArticleBrief } from 'types/articles'
-import { Button } from 'antd'
+import { Button, Typography } from 'antd'
 import { usePresenter } from './usePresenter'
 
+const { Title, Paragraph } = Typography
+
 const ArticleCard: React.FC<{ article: IArticleBrief }> = ({ article }) => {
-  const { title, description, createdAt, author, updatedAt, id } = article
+  const { title } = article
 
   const {
     briefDescription,
@@ -15,19 +17,13 @@ const ArticleCard: React.FC<{ article: IArticleBrief }> = ({ article }) => {
     formatedCreatedAt,
     formatedUpdatedAt,
     goToArticle,
-  } = usePresenter({
-    description,
-    author,
-    updatedAt,
-    createdAt,
-    articleId: id,
-  })
+  } = usePresenter(article)
 
   return (
     <Card>
       <div className="info">
-        <div className="title">{title}</div>
-        <div className="description">{briefDescription}</div>
+        <Title level={4}>{title}</Title>
+        <Paragraph>{briefDescription}</Paragraph>
 
         <div className="additional">
           <div>автор: {authorLabel}</div>
@@ -38,6 +34,7 @@ const ArticleCard: React.FC<{ article: IArticleBrief }> = ({ article }) => {
             {buttonLabel}
           </Button>
         </div>
+
       </div>
     </Card>
   )
@@ -50,10 +47,6 @@ const Card = styled.section`
   padding: 20px;
   background: #ffffff;
   word-break: break-all;
-
-  .title {
-    font-size: 24px;
-  }
 
   .additional {
     margin-top: 10px;

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Layout, Avatar, Dropdown, Menu } from 'antd'
+import { Layout, Avatar, Dropdown, Menu, Typography } from 'antd'
 import styled from 'styled-components'
 import { UserOutlined } from '@ant-design/icons'
 import { mixins } from 'styles'
@@ -8,6 +8,8 @@ import { actions } from 'store/auth/actions'
 import { useHistory } from 'react-router-dom'
 import { IMenuClickEventHandler } from 'types/common'
 import { IStore } from 'types/store'
+
+const { Text } = Typography
 
 const Header: React.FC = () => {
   const dispatch = useDispatch()
@@ -22,7 +24,7 @@ const Header: React.FC = () => {
     ({ key }: IMenuClickEventHandler) => {
       if (key === '/logout') {
         localStorage.removeItem('token')
-        return dispatch(actions.destroyUserData())
+        return dispatch(actions.destroyAuthData())
       }
 
       if (key !== pathname) {
@@ -42,13 +44,16 @@ const Header: React.FC = () => {
   return (
     <StyledHeader>
       {authedUser && (
-        <Dropdown overlay={menu} placement="bottomLeft">
-          <StyledAvatar
-            size="large"
-            icon={<UserOutlined />}
-            src={authedUser.image ? authedUser.image.url : undefined}
-          />
-        </Dropdown>
+        <div className="user">
+          <Text strong>{authedUser.name}</Text>
+          <Dropdown overlay={menu} placement="bottomLeft">
+            <StyledAvatar
+              size="large"
+              icon={<UserOutlined />}
+              src={authedUser.image ? authedUser.image.url : undefined}
+            />
+          </Dropdown>
+        </div>
       )}
     </StyledHeader>
   )
@@ -56,6 +61,18 @@ const Header: React.FC = () => {
 
 const StyledHeader = styled(Layout.Header)`
   ${mixins.displayFlex('row', 'flex-end', 'center')}
+
+  .user {
+    ${mixins.displayFlex('row', 'flex-start', 'center')}
+
+    .ant-typography {
+      color: #ffffff;
+    }
+
+    > * {
+      ${mixins.inlineSpace('10px')}
+    }
+  }
 `
 
 const StyledAvatar = styled(Avatar)`

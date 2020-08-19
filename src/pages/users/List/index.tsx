@@ -6,7 +6,7 @@ import { IUser } from 'types/users'
 import { actions } from 'store/users/actions'
 import { useFetchData } from 'hooks/fetchData.hook'
 
-const UsersPage: React.FC = () => {
+const UsersListPage: React.FC = () => {
   const { data, loading, error } = useFetchData({
     storeName: 'users',
     fetchAction: actions.fetchUsersListRequest,
@@ -33,4 +33,4 @@ const ItemList: React.FC<{ data: IUser[] }> = memo(({ data }) => (
   </List>
 ))
 
-export default UsersPage
+export default UsersListPage

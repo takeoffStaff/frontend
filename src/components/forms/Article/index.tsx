@@ -1,17 +1,18 @@
-import React from 'react'
-import { Input, Button, Form } from 'antd'
+import React, { memo } from 'react'
+import { Input, Form } from 'antd'
 import { FormItem } from 'styles/components'
 import { usePresenter } from './usePresenter'
+import { Store } from 'antd/lib/form/interface'
 
 interface IProps {
-  buttonLabel?: string
+  onSubmit: (values: Store) => void
 }
 
-const ArticleForm: React.FC<IProps> = ({ buttonLabel }) => {
-  const { form, onSubmit } = usePresenter()
+const ArticleForm: React.FC<IProps> = memo(({ onSubmit }) => {
+  const { form } = usePresenter()
 
   return (
-    <Form form={form} name="createArticle" onFinish={onSubmit} scrollToFirstError>
+    <Form form={form} name="articleForm" onFinish={onSubmit} scrollToFirstError>
       <FormItem
         name="title"
         label="Заголовок"
@@ -37,12 +38,8 @@ const ArticleForm: React.FC<IProps> = ({ buttonLabel }) => {
       >
         <Input.TextArea rows={5} />
       </FormItem>
-
-      <Button type="primary" htmlType="submit">
-        {buttonLabel}
-      </Button>
     </Form>
   )
-}
+})
 
 export default ArticleForm

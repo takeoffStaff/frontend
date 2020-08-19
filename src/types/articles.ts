@@ -1,3 +1,5 @@
+import { BlocksType } from './editor'
+
 interface IAuthor {
 	id: number
 	name: string
@@ -7,15 +9,26 @@ export interface IArticleBrief {
 	id: number
 	title: string
 	description: string
-  author: IAuthor
+	author: IAuthor
 	createdAt: string
 	updatedAt: string
 }
 
 export interface IArticle {
 	id: number
-	blocks: any[]
+	blocks: BlocksType
 	author: IAuthor
 	description: string
 	title: string
+}
+
+export interface ICreateArticleValues {
+	authorId: number
+	blocks: BlocksType
+	description: string
+	title: string
+}
+
+export interface IUpdateArticleValues extends ICreateArticleValues {
+	id: number
 }

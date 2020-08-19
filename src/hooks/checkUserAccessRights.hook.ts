@@ -9,9 +9,9 @@ export const useCheckUserAccessRights = () => {
 
   useEffect(() => {
     if (token) {
-      dispatch(actions.checkUserAccessRights())
+      dispatch(actions.checkAuthAccessRights())
     } else {
-      dispatch(actions.destroyUserData())
+      dispatch(actions.destroyAuthData())
       dispatch(appActions.setAppReady(true))
     }
   }, [dispatch, token])

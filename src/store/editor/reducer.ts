@@ -1,8 +1,9 @@
 import { actions } from './actions'
 import { InferActionsTypes } from 'store/configureStore'
+import { BlocksType } from 'types/editor'
 
 const initialState = {
-  blocks: [] as any[],
+  blocks: [] as BlocksType,
 }
 
 export const reducer = (state = initialState, action: InferActionsTypes<typeof actions>) => {

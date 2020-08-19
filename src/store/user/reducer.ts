@@ -1,63 +1,43 @@
 import { actions } from './actions'
 import { InferActionsTypes } from 'store/configureStore'
-import { IAuthedUser } from 'types/users'
 import { IError } from 'types/common'
+import { IUser } from 'types/users'
 
 const initialState = {
-  authedUser: null as IAuthedUser | null,
-  authed: false,
+  data: null as IUser | null,
   loading: false,
   error: null as IError | null,
 }
 
 export const reducer = (state = initialState, action: InferActionsTypes<typeof actions>) => {
   switch (action.type) {
-    case '[AUTH] FETCH_AUTH_LOGIN': {
+    case '[USER] FETCH_USER_REQUEST':
       return {
         ...state,
         loading: true,
-        error: null,
       }
-    }
-    case '[AUTH] FETCH_AUTH_REGISTRATION': {
+    case '[USER] FETCH_USER_SUCCESS': {
       return {
         ...state,
-        loading: true,
-        error: null,
-      }
-    }
-    case '[AUTH] CHECK_AUTH_ACCESS_RIGHTS': {
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      }
-    }
-    case '[AUTH] FETCH_AUTH_SUCCESS': {
-      return {
-        ...state,
-        authedUser: action.payload.user,
-        authed: true,
+        data: action.payload.user,
         loading: false,
         error: null,
       }
     }
-    case '[AUTH] FETCH_AUTH_ERROR': {
+    case '[USER] FETCH_USER_ERROR':
       return {
         ...state,
-        authedUser: null,
-        authed: false,
+        data: null,
         loading: false,
         error: {
           message: action.payload.message,
         },
       }
-    }
-    case '[AUTH] DESTROY_AUTH_DATA': {
+    case '[USER] DESTROY_USER_DATA': {
       return {
         ...state,
-        authedUser: null,
-        authed: false,
+        data: null,
+        loading: false,
         error: null,
       }
     }

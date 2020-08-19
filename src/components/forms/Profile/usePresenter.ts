@@ -15,7 +15,7 @@ export const usePresenter = () => {
       return
     }
 
-    dispatch(actions.fetchUserUpdate(values as IProfileFormValues, authedUser.id))
+    dispatch(actions.fetchAuthUpdate(values as IProfileFormValues, authedUser.id))
   }
 
   return { form, onSubmit, loading, authedUser }

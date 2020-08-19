@@ -14,11 +14,11 @@ export const usePresenter = () => {
   const { loading } = useSelector((store: IStore) => store.auth)
 
   const onSubmit = (values: Store) => {
-    dispatch(actions.fetchUserRegistration(values as IRegistrationFormValues))
+    dispatch(actions.fetchAuthRegistration(values as IRegistrationFormValues))
   }
 
   const goToLogin = useCallback((event: SyntheticEvent) => {
-		event.preventDefault()
+    event.preventDefault()
     redirect('/login')
   }, [])
 

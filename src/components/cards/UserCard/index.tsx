@@ -1,26 +1,36 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { IUser } from 'types/users'
-import { Avatar } from 'antd'
+import { Avatar, Button, Typography } from 'antd'
 import styled from 'styled-components'
 import { mixins } from 'styles'
 import moment from 'moment'
+import { redirect } from 'helpers/redirect'
+
+const { Title } = Typography
 
 const UserCard: React.FC<{ user: IUser }> = ({ user }) => {
-  if (!user) {
-    return null
-  }
+
+  const goToUser = useCallback(() => {
+    redirect(`/users/show/${user.id}`)
+  }, [user.id])
 
   const { image, name, email, phone, createdAt } = user
+  const formatedDate = moment(createdAt).format('DD MMMM YYYY')
+
   return (
     <Card>
       <StyledAvatar size="large" src={image ? image.url : undefined} />
+
       <div className="info">
-        <div className="name">{name}</div>
+        <Title level={4}>{name}</Title>
+
         <div className="additional">
           <Row label="e-mail" value={email} />
           <Row label="телефон" value={phone} />
-          <Row label="дата регистрации" value={moment(createdAt).format('DD MMMM YYYY')} />
+          <Row label="дата регистрации" value={formatedDate} />
         </div>
+
+        <Button type="primary" onClick={goToUser}>Открыть профиль</Button>
       </div>
     </Card>
   )
@@ -59,11 +69,6 @@ const Card = styled.div`
 
   .additional {
     ${mixins.displayFlex('column', 'flex-start', 'flex-start')}
-  }
-
-  .name {
-    font-size: 18px;
-    font-weight: bold;
   }
 `
 

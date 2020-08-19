@@ -1,6 +1,7 @@
 import { IAuthedUser, IUser } from 'types/users'
 import { IError } from './common'
 import { IArticleBrief, IArticle } from './articles'
+import { BlocksType } from './editor'
 
 export interface IStore {
   auth: {
@@ -14,11 +15,16 @@ export interface IStore {
     loading: boolean
     error: IError | null
   }
+  user: {
+    data: IUser | null
+    loading: boolean
+    error: IError | null
+  }
   app: {
     ready: boolean
   }
   editor: {
-    blocks: any[]
+    blocks: BlocksType
   }
   articles: {
     data: IArticleBrief[] | null

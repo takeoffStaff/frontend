@@ -1,28 +1,39 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { TextEditor } from 'components'
 import { ArticleForm } from 'components/forms'
-import { useParams } from 'react-router'
-import { useDispatch } from 'react-redux'
-import { actions } from 'store/article/actions'
+import { usePresenter } from './usePresenter'
+import { Button } from 'antd'
+import styled from 'styled-components'
+import { mixins } from 'styles'
 
 const EditArticlePage: React.FC = () => {
-  const { id } = useParams<{ id: string }>()
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(actions.fetchArticleRequest(id))
-
-    return () => {
-      dispatch(actions.destroyArticle())
-    }
-  }, [dispatch, id])
+  const { onSubmit, onDeleteArticle, onPreview } = usePresenter()
 
   return (
-    <div>
-      <ArticleForm />
+    <Page>
+      <ArticleForm onSubmit={onSubmit} />
       <TextEditor />
-    </div>
+      <div className="button-group">
+        <Button onClick={onPreview} >Предпросмотр</Button>
+        <Button form="articleForm" htmlType="submit">Сохранить изменения</Button>
+        <Button danger onClick={onDeleteArticle}>Удалить статью</Button>
+      </div>
+    </Page>
   )
 }
+
+const Page = styled.div`
+  .button-group {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    z-index: 1000;
+
+    > * {
+      ${mixins.inlineSpace('10px')}
+    }
+  }
+`
 
 export default EditArticlePage

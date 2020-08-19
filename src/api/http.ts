@@ -15,7 +15,7 @@ export async function http(url: string, method: Method = 'GET', body: Body = nul
   const res = await fetch(`${PREFIX}${url}`, { method, body, headers })
 
   if (res.status === 401) {
-    window.store.dispatch(authActions.destroyUserData())
+    window.store.dispatch(authActions.destroyAuthData())
     localStorage.removeItem('token')
     redirect('/login')
     return

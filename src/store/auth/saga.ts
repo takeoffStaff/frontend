@@ -6,7 +6,7 @@ import { IAuthedUser } from 'types/users'
 import { http } from 'api/http'
 import { omit } from 'lodash'
 
-function* fetchUserLogin(action: ReturnType<typeof actions.fetchUserLogin>) {
+function* fetchAuthLogin(action: ReturnType<typeof actions.fetchAuthLogin>) {
   try {
     const user: IAuthedUser = yield call(
       http,
@@ -16,19 +16,19 @@ function* fetchUserLogin(action: ReturnType<typeof actions.fetchUserLogin>) {
       { 'Content-Type': 'application/json' }
     )
 
-    yield put(actions.fetchUserSuccess(user))
+    yield put(actions.fetchAuthSuccess(user))
 
     localStorage.setItem('token', user.token)
   } catch (error) {
-    yield put(actions.destroyUserData())
-    yield put(actions.fetchUserError(error.message))
+    yield put(actions.destroyAuthData())
+    yield put(actions.fetchAuthError(error.message))
 
     console.error(error.message)
     localStorage.removeItem('token')
   }
 }
 
-function* fetchUserRegistration(action: ReturnType<typeof actions.fetchUserRegistration>) {
+function* fetchAuthRegistration(action: ReturnType<typeof actions.fetchAuthRegistration>) {
   try {
     const user: IAuthedUser = yield call(
       http,
@@ -38,19 +38,19 @@ function* fetchUserRegistration(action: ReturnType<typeof actions.fetchUserRegis
       { 'Content-Type': 'application/json' }
     )
 
-    yield put(actions.fetchUserSuccess(user))
+    yield put(actions.fetchAuthSuccess(user))
 
     localStorage.setItem('token', user.token)
   } catch (error) {
-    yield put(actions.destroyUserData())
-    yield put(actions.fetchUserError(error.message))
+    yield put(actions.destroyAuthData())
+    yield put(actions.fetchAuthError(error.message))
 
     console.error(error.message)
     localStorage.removeItem('token')
   }
 }
 
-function* fetchUserUpdate(action: ReturnType<typeof actions.fetchUserUpdate>) {
+function* fetchAuthUpdate(action: ReturnType<typeof actions.fetchAuthUpdate>) {
   try {
     const { profileValues, userId } = action.payload
 
@@ -58,7 +58,7 @@ function* fetchUserUpdate(action: ReturnType<typeof actions.fetchUserUpdate>) {
       'Content-Type': 'application/json',
     })
 
-    yield put(actions.fetchUserSuccess(user))
+    yield put(actions.fetchAuthSuccess(user))
 
     localStorage.setItem('token', user.token)
 
@@ -67,21 +67,21 @@ function* fetchUserUpdate(action: ReturnType<typeof actions.fetchUserUpdate>) {
       description: 'Данные успешно изменены',
     })
   } catch (error) {
-    yield put(actions.destroyUserData())
-    yield put(actions.fetchUserError(error.message))
+    yield put(actions.destroyAuthData())
+    yield put(actions.fetchAuthError(error.message))
 
     console.error(error.message)
     localStorage.removeItem('token')
   }
 }
 
-function* checkUserAccessRights() {
+function* checkAuthAccessRights() {
   try {
     yield put(appActions.setAppReady(false))
 
     const user: IAuthedUser = yield call(http, '/auth/check')
 
-    yield put(actions.fetchUserSuccess(user))
+    yield put(actions.fetchAuthSuccess(user))
     yield localStorage.setItem('token', user.token)
     yield put(appActions.setAppReady(true))
 
@@ -91,15 +91,15 @@ function* checkUserAccessRights() {
     })
   } catch (error) {
     console.error(error.message)
-    yield put(actions.fetchUserError(error.message))
-    yield put(actions.destroyUserData())
+    yield put(actions.fetchAuthError(error.message))
+    yield put(actions.destroyAuthData())
     yield put(appActions.setAppReady(true))
   }
 }
 
 export function* authSaga() {
-  yield takeEvery('[USER] FETCH_USER_LOGIN', fetchUserLogin)
-  yield takeEvery('[USER] FETCH_USER_UPDATE', fetchUserUpdate)
-  yield takeEvery('[USER] FETCH_USER_REGISTRATION', fetchUserRegistration)
-  yield takeEvery('[USER] CHECK_USER_ACCESS_RIGHTS', checkUserAccessRights)
+  yield takeEvery('[AUTH] FETCH_AUTH_LOGIN', fetchAuthLogin)
+  yield takeEvery('[AUTH] FETCH_AUTH_UPDATE', fetchAuthUpdate)
+  yield takeEvery('[AUTH] FETCH_AUTH_REGISTRATION', fetchAuthRegistration)
+  yield takeEvery('[AUTH] CHECK_AUTH_ACCESS_RIGHTS', checkAuthAccessRights)
 }

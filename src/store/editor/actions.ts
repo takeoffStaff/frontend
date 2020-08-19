@@ -1,5 +1,7 @@
+import { BlocksType } from 'types/editor'
+
 export const actions = {
-	setEditorBlocks: (blocks: any) =>
+	setEditorBlocks: (blocks: BlocksType) =>
 		({
 			type: '[EDITOR] SET_EDITOR_BLOCKS',
 			payload: { blocks }

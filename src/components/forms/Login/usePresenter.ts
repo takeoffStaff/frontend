@@ -15,7 +15,7 @@ export const usePresenter = () => {
 
   const onSubmit = useCallback(
     (values: Store) => {
-      dispatch(actions.fetchUserLogin(values as ILoginFormValues))
+      dispatch(actions.fetchAuthLogin(values as ILoginFormValues))
     },
     [dispatch]
   )

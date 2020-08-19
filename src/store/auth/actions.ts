@@ -2,43 +2,43 @@ import { IRegistrationFormValues, IProfileFormValues, ILoginFormValues } from 't
 import { IAuthedUser } from 'types/users'
 
 export const actions = {
-  fetchUserLogin: (loginValues: ILoginFormValues) =>
+  fetchAuthLogin: (loginValues: ILoginFormValues) =>
     ({
-      type: '[USER] FETCH_USER_LOGIN',
+      type: '[AUTH] FETCH_AUTH_LOGIN',
       payload: { loginValues },
     } as const),
 
-  fetchUserRegistration: (registrationValues: IRegistrationFormValues) =>
+  fetchAuthRegistration: (registrationValues: IRegistrationFormValues) =>
     ({
-      type: '[USER] FETCH_USER_REGISTRATION',
+      type: '[AUTH] FETCH_AUTH_REGISTRATION',
       payload: { registrationValues },
     } as const),
 
-  fetchUserSuccess: (user: IAuthedUser) =>
+  fetchAuthSuccess: (user: IAuthedUser) =>
     ({
-      type: '[USER] FETCH_USER_SUCCESS',
+      type: '[AUTH] FETCH_AUTH_SUCCESS',
       payload: { user },
     } as const),
 
-  fetchUserError: (message: string) =>
+  fetchAuthError: (message: string) =>
     ({
-      type: '[USER] FETCH_USER_ERROR',
+      type: '[AUTH] FETCH_AUTH_ERROR',
       payload: { message },
     } as const),
 
-  fetchUserUpdate: (profileValues: IProfileFormValues, userId: number) =>
+  fetchAuthUpdate: (profileValues: IProfileFormValues, userId: number) =>
     ({
-      type: '[USER] FETCH_USER_UPDATE',
+      type: '[AUTH] FETCH_AUTH_UPDATE',
       payload: { profileValues, userId },
     } as const),
 
-  destroyUserData: () =>
+  destroyAuthData: () =>
     ({
-      type: '[USER] DESTROY_USER_DATA',
+      type: '[AUTH] DESTROY_AUTH_DATA',
     } as const),
 
-  checkUserAccessRights: () =>
+  checkAuthAccessRights: () =>
     ({
-      type: '[USER] CHECK_USER_ACCESS_RIGHTS',
+      type: '[AUTH] CHECK_AUTH_ACCESS_RIGHTS',
     } as const),
 }

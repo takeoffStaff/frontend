@@ -29,7 +29,9 @@ const Routes: React.FC = () => {
             <Suspense fallback={<Spinner />}>
               <PrivateRoute exact path="/dashboard" component={lazy(() => import('pages/Dashboard'))} />
               <PrivateRoute exact path="/profile" component={lazy(() => import('pages/Profile'))} />
-              <PrivateRoute exact path="/users" component={lazy(() => import('pages/Users'))} />
+
+              <PrivateRoute exact path="/users" component={lazy(() => import('pages/users/List'))} />
+              <PrivateRoute exact path="/users/show/:id" component={lazy(() => import('pages/users/Show'))} />
 
               <PrivateRoute exact path="/articles" component={lazy(() => import('pages/articles/List'))} />
               <PrivateRoute exact path="/articles/create" component={lazy(() => import('pages/articles/Create'))} />

@@ -1,28 +1,28 @@
-import embed from '@editorjs/embed'
-import table from '@editorjs/table'
+// import embed from '@editorjs/embed'
+// import table from '@editorjs/table'
 import list from '@editorjs/list'
-import warning from '@editorjs/warning'
+// import warning from '@editorjs/warning'
 import code from '@editorjs/code'
-import link from '@editorjs/link'
+// import link from '@editorjs/link'
 import image from '@editorjs/image'
-import raw from '@editorjs/raw'
+// import raw from '@editorjs/raw'
 import header from '@editorjs/header'
-import quote from '@editorjs/quote'
-import marker from '@editorjs/marker'
-import checklist from '@editorjs/checklist'
-import inlineCode from '@editorjs/inline-code'
-import delimiter from '@editorjs/delimiter'
-import simpleImage from '@editorjs/simple-image'
+// import quote from '@editorjs/quote'
+// import marker from '@editorjs/marker'
+// import checklist from '@editorjs/checklist'
+// import inlineCode from '@editorjs/inline-code'
+// import delimiter from '@editorjs/delimiter'
+// import simpleImage from '@editorjs/simple-image'
 import paragraph from '@editorjs/paragraph'
 import { http } from 'api/http'
 
 export const editorTools = {
-  embed,
-  table,
+  // embed,
+  // table,
   list,
-  warning,
+  // warning,
   code,
-  link,
+  // link,
   image: {
     class: image,
     config: {
@@ -32,7 +32,7 @@ export const editorTools = {
       uploader: {
         async uploadByFile(file: File) {
           const formData = new FormData()
-					formData.append('image', file)
+          formData.append('image', file)
 
           return http('/upload/image', 'POST', formData).then((res) => {
             return {
@@ -46,14 +46,14 @@ export const editorTools = {
       },
     },
   },
-  raw,
+  // raw,
   header,
-  quote,
-  marker,
-  checklist,
-  inlineCode,
-  delimiter,
-  simpleImage,
+  // quote,
+  // marker,
+  // checklist,
+  // inlineCode,
+  // delimiter,
+  // simpleImage,
   paragraph: {
     class: paragraph,
     inlineToolbar: true,

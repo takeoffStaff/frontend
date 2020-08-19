@@ -40,3 +40,5 @@ export interface IImageBlock {
     withBackground: boolean
   }
 }
+
+export type BlocksType = Array<IHeaderBlock | IParagraphBlock | IListBlock | ICodeBlock | IImageBlock>

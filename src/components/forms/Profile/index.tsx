@@ -19,10 +19,9 @@ const ProfileForm: React.FC = () => {
         label="Никнейм"
         initialValue={authedUser.name}
         rules={[
-          {
-            required: true,
-            message: 'Введите никнейм',
-          },
+          { required: true, message: 'Введите никнейм' },
+          { max: 10, message: 'Максимальная длинна 10 символов' },
+          { min: 3, message: 'Минимальная длинна 3 символа' }
         ]}
       >
         <Input autoComplete="new-password" />

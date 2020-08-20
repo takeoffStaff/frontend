@@ -60,7 +60,7 @@ const UploadImage: React.FC<IProps> = ({ initialValue }) => {
         showUploadList={false}
         headers={{ Authorization: `Bearer ${localStorage.getItem('token')}` }}
         beforeUpload={beforeUpload}
-        action="api/upload/image"
+        action="api/upload/images"
         onChange={handleChange}
       >
         {url ? <img src={url} alt="alt" style={{ width: '100%' }} /> : uploadButton}

@@ -34,7 +34,7 @@ function* fetchCreateArticle(action: ReturnType<typeof actions.fetchCreateArticl
 
 function* fetchUpdateArticle(action: ReturnType<typeof actions.fetchUpdateArticle>) {
   try {
-    yield call(http, `/articles/${action.payload.article.id}`, 'PATCH', JSON.stringify({ ...action.payload.article }), {
+    yield call(http, `/articles/${action.payload.article.id}`, 'PUT', JSON.stringify({ ...action.payload.article }), {
       'Content-Type': 'application/json',
     })
 

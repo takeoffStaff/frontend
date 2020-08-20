@@ -6,13 +6,18 @@ export interface IUser {
   name: string
   phone: string
   image: IImage | null
-	createdAt: string
-	articles: {
-		title: string
-		description: string
-	}
+  createdAt: string
+  articles: {
+    title: string
+    description: string
+  }
 }
 
-export interface IAuthedUser extends IUser {
+export interface IAuthedUser {
+  email: string
+  id: number
+  image: IImage | null
+  name: string
+  phone: string
   token: string
 }

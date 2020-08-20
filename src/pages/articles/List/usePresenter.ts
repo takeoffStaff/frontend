@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
 import { redirect } from 'helpers/redirect'
 import { actions } from 'store/articles/actions'
-import { useFetchData } from 'hooks/fetchData.hook'
+import { useFetchDataList } from 'hooks/fetchDataList.hook'
 
 export const usePresenter = () => {
-  const { data, loading, error } = useFetchData({
+  const { data, loading, error } = useFetchDataList({
     storeName: 'articles',
     fetchAction: actions.fetchArticlesList,
     destroyDataAction: actions.destroyArticlesList,

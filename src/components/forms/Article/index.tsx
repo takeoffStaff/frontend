@@ -17,10 +17,9 @@ const ArticleForm: React.FC<IProps> = memo(({ onSubmit }) => {
         name="title"
         label="Заголовок"
         rules={[
-          {
-            required: true,
-            message: 'Введите заголовок',
-          },
+          { required: true, message: 'Введите заголовок' },
+          { min: 3, message: 'Минимальная длина заголовка 3 символа' },
+          { max: 255, message: 'Максимальная длина заголовка 255 символов' }
         ]}
       >
         <Input autoComplete="new-password" />
@@ -30,10 +29,7 @@ const ArticleForm: React.FC<IProps> = memo(({ onSubmit }) => {
         name="description"
         label="Описание"
         rules={[
-          {
-            required: true,
-            message: 'Введите описание',
-          },
+          { required: true, message: 'Введите описание' },
         ]}
       >
         <Input.TextArea rows={5} />

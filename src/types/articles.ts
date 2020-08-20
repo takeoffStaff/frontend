@@ -23,7 +23,6 @@ export interface IArticle {
 }
 
 export interface ICreateArticleValues {
-	authorId: number
 	blocks: BlocksType
 	description: string
 	title: string

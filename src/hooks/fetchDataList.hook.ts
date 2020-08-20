@@ -9,7 +9,7 @@ interface IProps {
   destroyDataAction: () => void
 }
 
-export const useFetchData = ({ storeName, fetchAction, destroyDataAction }: IProps) => {
+export const useFetchDataList = ({ storeName, fetchAction, destroyDataAction }: IProps) => {
   const dispatch = useDispatch()
 
   const { currentPage } = useSelector((store: IStore) => store.pagination)

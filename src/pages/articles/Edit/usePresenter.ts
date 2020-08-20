@@ -14,7 +14,6 @@ export const usePresenter = () => {
 
   const { blocks, contentIsReady } = useSelector((store: IStore) => store.editor)
   const editedArticle = useSelector((store: IStore) => store.article)
-  const { authedUser } = useSelector((store: IStore) => store.auth)
 
   useEffect(() => {
     dispatch(actions.fetchArticleRequest(id))
@@ -26,18 +25,16 @@ export const usePresenter = () => {
 
   const onSubmit = useCallback(
     (values: Store) => {
-      if (!authedUser) { return }
 
       const article: IUpdateArticleValues = {
         ...omit(editedArticle.data, 'author'),
         ...(values as IArticleFormValues),
         blocks: blocks,
-        authorId: authedUser.id,
       }
 
       dispatch(actions.fetchUpdateArticle(article))
     },
-    [dispatch, blocks, editedArticle.data, authedUser]
+    [dispatch, blocks, editedArticle.data]
   )
 
   const onDeleteArticle = useCallback(() => {

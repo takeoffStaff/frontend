@@ -20,7 +20,7 @@ const ArticlesListPage: React.FC = () => {
         {!loading && !error && data && <ItemList data={data as IArticleBrief[]} />}
       </div>
 
-      <Pagination />
+      {data && !!data.length && <Pagination />}
     </React.Fragment>
   )
 }

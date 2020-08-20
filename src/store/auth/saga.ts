@@ -54,7 +54,7 @@ function* fetchAuthUpdate(action: ReturnType<typeof actions.fetchAuthUpdate>) {
   try {
     const { profileValues, userId } = action.payload
 
-    const user: IAuthedUser = yield call(http, '/users', 'PATCH', JSON.stringify({ ...profileValues, id: userId }), {
+    const user: IAuthedUser = yield call(http, `/users/${userId}`, 'PUT', JSON.stringify({ ...profileValues, id: userId }), {
       'Content-Type': 'application/json',
     })
 

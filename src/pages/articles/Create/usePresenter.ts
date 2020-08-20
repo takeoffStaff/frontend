@@ -10,21 +10,18 @@ export const usePresenter = () => {
   const dispatch = useDispatch()
 
   const { blocks, contentIsReady } = useSelector((store: IStore) => store.editor)
-  const { authedUser } = useSelector((store: IStore) => store.auth)
 
   const onSubmit = useCallback(
     (values: Store) => {
-      if (!authedUser) { return }
 
       const article: ICreateArticleValues = {
         ...(values as IArticleFormValues),
         blocks: blocks,
-        authorId: authedUser.id,
       }
 
       dispatch(actions.fetchCreateArticle(article))
     },
-    [dispatch, blocks, authedUser]
+    [dispatch, blocks]
   )
 
   return { onSubmit, contentIsReady }

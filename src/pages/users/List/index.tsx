@@ -4,10 +4,10 @@ import { UserCard } from 'components/cards'
 import { Pagination, Spinner } from 'components'
 import { IUser } from 'types/users'
 import { actions } from 'store/users/actions'
-import { useFetchData } from 'hooks/fetchData.hook'
+import { useFetchDataList } from 'hooks/fetchDataList.hook'
 
 const UsersListPage: React.FC = () => {
-  const { data, loading, error } = useFetchData({
+  const { data, loading, error } = useFetchDataList({
     storeName: 'users',
     fetchAction: actions.fetchUsersListRequest,
     destroyDataAction: actions.destroyUsersList,
@@ -20,7 +20,7 @@ const UsersListPage: React.FC = () => {
   return (
     <React.Fragment>
       {!loading && !error && data && <ItemList data={data as IUser[]} />}
-      <Pagination />
+      {data && !!data.length && <Pagination />}
     </React.Fragment>
   )
 }

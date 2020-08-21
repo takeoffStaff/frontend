@@ -19,5 +19,6 @@ export const usePresenter = () => {
     data,
     loading,
     error,
+    searchAction: actions.fetchArticlesList,
   }
 }

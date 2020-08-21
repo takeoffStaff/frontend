@@ -8,9 +8,9 @@ import { omit } from 'lodash'
 
 function* fetchArticlesList(action: ReturnType<typeof actions.fetchArticlesList>) {
   try {
-    const { page, perPage } = action.payload.requestParams
+    const { page = 1, perPage = 5, search = { title: '' } } = action.payload.requestParams
 
-    const articles: IPaginate<IArticleBrief[]> = yield call(http, `/articles?page=${page}&size=${perPage}`, 'GET')
+    const articles: IPaginate<IArticleBrief[]> = yield call(http, `/articles?page=${page}&size=${perPage}&title=${search.title}`, 'GET')
 
     yield put(paginateActions.setPagination(omit(articles, ['data'])))
     yield put(actions.fetchArticlesListSuccess(articles.data))

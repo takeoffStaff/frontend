@@ -34,7 +34,7 @@ export const editorTools = {
           const formData = new FormData()
           formData.append('image', file)
 
-          return http('/upload/image', 'POST', formData).then((res) => {
+          return http('/upload/images', 'POST', formData).then((res) => {
             return {
               success: 1,
               file: {

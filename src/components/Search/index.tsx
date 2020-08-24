@@ -12,16 +12,21 @@ interface ISearchProps {
 const Search: React.FC<ISearchProps> = ({ placeholder, searchAction }) => {
 
   const [term, setTerm] = useState<string>('')
+  const [readyToSearch, setReadyToSearch] = useState<boolean>(false)
 
   const dispatch = useDispatch()
   const debouncedTerm = useDebounce(term, 500)
 
   useEffect(() => {
+    if (!readyToSearch) { return }
     dispatch(searchAction({ search: { title: debouncedTerm } }))
+
+    // eslint-disable-next-line
   }, [debouncedTerm, dispatch, searchAction])
 
   const onSearch = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setTerm(event.target.value)
+    setReadyToSearch(true)
   }, [])
 
   return (

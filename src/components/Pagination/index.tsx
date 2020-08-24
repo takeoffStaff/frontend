@@ -18,7 +18,6 @@ const Pagination: React.FC = () => {
 
   return (
     <AntPagination
-      style={{ marginTop: '20px' }}
       current={currentPage}
       pageSize={perPage}
       total={totalItems}

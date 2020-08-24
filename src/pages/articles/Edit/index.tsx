@@ -14,10 +14,12 @@ const EditArticlePage: React.FC = () => {
     <Page>
       <ArticleForm onSubmit={onSubmit} />
       <TextEditor />
+
       <div className="buttons-group">
         <Button type="primary" form="articleForm" disabled={!contentIsReady} htmlType="submit">Сохранить изменения</Button>
         <Button danger onClick={onDeleteArticle}>Удалить статью</Button>
       </div>
+
     </Page>
   )
 }

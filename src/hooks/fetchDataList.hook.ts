@@ -9,7 +9,7 @@ interface IProps {
   destroyDataAction: () => void
 }
 
-export const useFetchDataList = ({ storeName, fetchAction, destroyDataAction }: IProps) => {
+export const useFetchDataList = <T>({ storeName, fetchAction, destroyDataAction }: IProps) => {
   const dispatch = useDispatch()
 
   const { currentPage } = useSelector((store: IStore) => store.pagination)
@@ -24,7 +24,7 @@ export const useFetchDataList = ({ storeName, fetchAction, destroyDataAction }: 
   }, [dispatch, currentPage, fetchAction, destroyDataAction])
 
   return {
-    data,
+    data: data as unknown as T,
     loading,
     error,
   }

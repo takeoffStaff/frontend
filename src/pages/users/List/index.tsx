@@ -7,7 +7,7 @@ import { actions } from 'store/users/actions'
 import { useFetchDataList } from 'hooks/fetchDataList.hook'
 
 const UsersListPage: React.FC = () => {
-  const { data, loading, error } = useFetchDataList({
+  const { data, loading, error } = useFetchDataList<IUser[]>({
     storeName: 'users',
     fetchAction: actions.fetchUsersListRequest,
     destroyDataAction: actions.destroyUsersList,

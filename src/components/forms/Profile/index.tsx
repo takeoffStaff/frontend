@@ -2,7 +2,7 @@ import React from 'react'
 import { Input, Button, Form, Spin } from 'antd'
 import { FormItem } from 'styles/components'
 import { usePresenter } from './usePresenter'
-import { UploadImage } from 'components'
+import { UploadImage, MaskedInput } from 'components'
 
 const ProfileForm: React.FC = () => {
   const { form, onSubmit, loading, authedUser } = usePresenter()
@@ -46,7 +46,7 @@ const ProfileForm: React.FC = () => {
       </FormItem>
 
       <FormItem name="phone" label="Номер телефона" initialValue={authedUser.phone}>
-        <Input />
+        <MaskedInput mask="+7 (999)-999-99-99" />
       </FormItem>
 
       <Button type="primary" htmlType="submit" loading={loading}>

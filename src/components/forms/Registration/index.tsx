@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { usePresenter } from './usePresenter'
 import { Input, Tooltip, Button } from 'antd'
 import { FormItem, AuthForm } from 'styles/components'
+import { MaskedInput } from 'components'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 
 const RegistrationForm: React.FC = () => {
@@ -90,7 +91,7 @@ const RegistrationForm: React.FC = () => {
       </FormItem>
 
       <FormItem name="phone" label="Номер телефона">
-        <Input />
+        <MaskedInput mask="+7 (999)-999-99-99" />
       </FormItem>
 
       <Div>

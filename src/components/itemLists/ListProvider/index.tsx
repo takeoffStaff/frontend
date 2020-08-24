@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, memo } from 'react'
 import { Typography } from 'antd'
 import { Spinner, ErrorMessage, Pagination } from 'components'
 import { IUser } from 'types/users'
@@ -13,7 +13,7 @@ interface IListProviderProps {
   }
 }
 
-const ListProvider: React.FC<IListProviderProps> = ({ data, children }) => {
+const ListProvider: React.FC<IListProviderProps> = memo(({ data, children }) => {
 
   const { loading, error, dataItems } = data
 
@@ -36,6 +36,6 @@ const ListProvider: React.FC<IListProviderProps> = ({ data, children }) => {
       <Pagination />
     </Fragment>
   )
-}
+})
 
 export default ListProvider

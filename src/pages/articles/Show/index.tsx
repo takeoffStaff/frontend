@@ -41,7 +41,7 @@ const ShowArticlePage: React.FC = () => {
 const Page = styled.div`
   width: 50%;
   margin: 0 auto;
-  word-break: break-all;
+  word-break: break-word;
 
   .content {
     margin-top: 100px;

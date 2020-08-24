@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spinner } from 'components'
+import { Spinner, ErrorMessage } from 'components'
 import { usePresenter } from './usePresenter'
 import { Avatar, Typography } from 'antd'
 import styled from 'styled-components'
@@ -16,6 +16,10 @@ const ShowUserPage: React.FC = () => {
     return <Spinner />
   }
 
+  if (error) {
+    return <ErrorMessage message={error.message} />
+  }
+
   if (!data) {
     return null
   }
@@ -26,26 +30,22 @@ const ShowUserPage: React.FC = () => {
 
   return (
     <Page>
-      <div className="user">
-        <StyledAvatar size="large" src={image ? image.url : undefined} />
-        <div className="info">
-          <Title level={3}>{name}</Title>
-          <div>E-mail: {email}</div>
-          <div>Телефон: {phone}</div>
-          <div>Дата регистрации: {formatedDate}</div>
-        </div>
+      <StyledAvatar size="large" src={image ? image.url : undefined} />
+      <div>
+        <Title level={3}>{name}</Title>
+        <div>E-mail: {email}</div>
+        <div>Телефон: {phone}</div>
+        <div>Дата регистрации: {formatedDate}</div>
       </div>
     </Page>
   )
 }
 
 const Page = styled.div`
-  .user {
-    ${mixins.displayFlex('row', 'flex-start', 'flex-start')}
+  ${mixins.displayFlex('row', 'flex-start', 'flex-start')}
 
-    > * {
-      ${mixins.inlineSpace('30px')}
-    }
+  > * {
+    ${mixins.inlineSpace('30px')}
   }
 `
 
